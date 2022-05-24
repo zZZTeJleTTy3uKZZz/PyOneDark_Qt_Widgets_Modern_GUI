@@ -55,8 +55,8 @@ class PyLeftMenu(QWidget):
         maximum_width = 240,
         icon_path = "icon_menu.svg",
         icon_path_close = "icon_menu_close.svg",
-        toggle_text = "Hide Menu",
-        toggle_tooltip = "Show menu"
+        toggle_text = "Скрыть меню",
+        toggle_tooltip = "Показать меню"
     ):
         super().__init__()
 

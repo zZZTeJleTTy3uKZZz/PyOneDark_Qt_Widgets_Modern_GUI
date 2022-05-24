@@ -290,7 +290,7 @@ class SetupMainWindow:
         # PAGE 2
         # CIRCULAR PROGRESS 1
         self.circular_progress_1 = PyCircularProgress(
-            value = 80,
+            value = 100,
             progress_color = self.themes["app_color"]["context_color"],
             text_color = self.themes["app_color"]["text_title"],
             font_size = 14,

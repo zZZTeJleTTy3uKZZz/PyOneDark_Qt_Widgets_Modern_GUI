@@ -44,6 +44,8 @@ os.environ["QT_FONT_DPI"] = "96"
 
 # MAIN WINDOW
 # ///////////////////////////////////////////////////////////////
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -61,7 +63,7 @@ class MainWindow(QMainWindow):
 
         # SETUP MAIN WINDOW
         # ///////////////////////////////////////////////////////////////
-        self.hide_grips = True # Show/Hide resize grips
+        self.hide_grips = True  # Show/Hide resize grips
         SetupMainWindow.setup_gui(self)
 
         # SHOW MAIN WINDOW
@@ -80,13 +82,14 @@ class MainWindow(QMainWindow):
         if btn.objectName() != "btn_settings":
             self.ui.left_menu.deselect_all_tab()
 
-        # Get Title Bar Btn And Reset Active         
-        top_settings = MainFunctions.get_title_bar_btn(self, "btn_top_settings")
+        # Get Title Bar Btn And Reset Active
+        top_settings = MainFunctions.get_title_bar_btn(
+            self, "btn_top_settings")
         top_settings.set_active(False)
 
         # LEFT MENU
         # ///////////////////////////////////////////////////////////////
-        
+
         # HOME BTN
         if btn.objectName() == "btn_home":
             # Select Menu
@@ -108,7 +111,7 @@ class MainWindow(QMainWindow):
             # Select Menu
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load Page 3 
+            # Load Page 3
             MainFunctions.set_page(self, self.ui.load_pages.page_3)
 
         # BOTTOM INFORMATION
@@ -125,16 +128,16 @@ class MainWindow(QMainWindow):
                     self.ui.left_menu.deselect_all_tab()
                     # Show / Hide
                     MainFunctions.toggle_left_column(self)
-                
+
                 self.ui.left_menu.select_only_one_tab(btn.objectName())
 
             # Change Left Column Menu
             if btn.objectName() != "btn_close_left_column":
                 MainFunctions.set_left_column_menu(
-                    self, 
-                    menu = self.ui.left_column.menus.menu_2,
-                    title = "Info tab",
-                    icon_path = Functions.set_svg_icon("icon_info.svg")
+                    self,
+                    menu=self.ui.left_column.menus.menu_2,
+                    title="Info tab",
+                    icon_path=Functions.set_svg_icon("icon_info.svg")
                 )
 
         # SETTINGS LEFT
@@ -154,15 +157,15 @@ class MainWindow(QMainWindow):
             # Change Left Column Menu
             if btn.objectName() != "btn_close_left_column":
                 MainFunctions.set_left_column_menu(
-                    self, 
-                    menu = self.ui.left_column.menus.menu_1,
-                    title = "Settings Left Column",
-                    icon_path = Functions.set_svg_icon("icon_settings.svg")
+                    self,
+                    menu=self.ui.left_column.menus.menu_1,
+                    title="Settings Left Column",
+                    icon_path=Functions.set_svg_icon("icon_settings.svg")
                 )
-        
+
         # TITLE BAR MENU
         # ///////////////////////////////////////////////////////////////
-        
+
         # SETTINGS TITLE BAR
         if btn.objectName() == "btn_top_settings":
             # Toogle Active
@@ -177,9 +180,10 @@ class MainWindow(QMainWindow):
                 # Show / Hide
                 MainFunctions.toggle_right_column(self)
 
-            # Get Left Menu Btn            
-            top_settings = MainFunctions.get_left_menu_btn(self, "btn_settings")
-            top_settings.set_active_tab(False)            
+            # Get Left Menu Btn
+            top_settings = MainFunctions.get_left_menu_btn(
+                self, "btn_settings")
+            top_settings.set_active_tab(False)
 
         # DEBUG
         print(f"Button {btn.objectName()}, clicked!")
