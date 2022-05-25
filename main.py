@@ -20,6 +20,8 @@ from gui.uis.windows.main_window.functions_main_window import *
 import sys
 import os
 
+
+from gui.uis.windows.main_window.db_func import *
 # IMPORT QT CORE
 # ///////////////////////////////////////////////////////////////
 from qt_core import *
@@ -168,6 +170,11 @@ class MainWindow(QMainWindow):
 
         # SETTINGS TITLE BAR
         if btn.objectName() == "btn_top_settings":
+            self.ui.left_menu.show()
+            left_menu_margin = self.settings["left_menu_content_margins"]
+            left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
+            self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
+            
             # Toogle Active
             if not MainFunctions.right_column_is_visible(self):
                 btn.set_active(True)
@@ -184,6 +191,23 @@ class MainWindow(QMainWindow):
             top_settings = MainFunctions.get_left_menu_btn(
                 self, "btn_settings")
             top_settings.set_active_tab(False)
+
+        if btn.objectName() == "btn_search":
+            # Скрытие и раскрытие левого меню
+            top_info = MainFunctions.get_title_bar_btn(
+            self, "btn_info")
+            if self.ui.left_menu.menu.top_info.isVisible():
+                self.ui.left_menu.menu.top_info.hide()
+            # if self.ui.left_menu.isVisible():
+            #     self.ui.left_menu_frame.setMinimumSize(0,0)
+            #     self.ui.left_menu.hide()
+            #     print('Скрыто')
+            # else:
+            #     left_menu_margin = self.settings["left_menu_content_margins"]
+            #     left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
+            #     self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
+            #     self.ui.left_menu.show()
+            #     print('Показано')
 
         # DEBUG
         print(f"Button {btn.objectName()}, clicked!")

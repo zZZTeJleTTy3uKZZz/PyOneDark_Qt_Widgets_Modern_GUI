@@ -1,0 +1,1 @@
+piSide6-uic main_pages.ui -o ui_main_pages.py

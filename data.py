@@ -1,0 +1,31 @@
+from models import *
+
+with db:
+   #  db.create_tables([Role, User, Storonnik, E_type, Event, Action, Task, Kpi_type, Kpi, Quote])
+
+    # Роли в структуре
+    # roles = [
+    #     {'name':'Администратор'},
+    #     {'name':'Секретарь РО'},
+    #     {'name':'Бригадир'},
+    #     {'name':'Кандидат'}
+    # ]
+
+    # Role.insert_many(roles).execute()
+
+    rolesid = Role.select()
+    users = [
+        {'role_id':rolesid[0], 'l_name':'Тест', 'name':'Тестович', 'login':'1', 'passwd':'1', 'age':19, 'address':'ул. Бруснева, д.12', 'telephone':'+79288201158', 'responsible_id' : 1},
+        {'role_id':rolesid[0], 'l_name':'Семенов', 'name':'Дмитрий', 'login':'admin', 'passwd':'admin123BOG', 'age':19, 'address':'ул. Бруснева, д.12', 'telephone':'+79288201158', 'responsible_id' : 1},
+        {'role_id':rolesid[1], 'l_name':'Исупов', 'name':'Иван', 'login':'i.isupov', 'passwd':'pass12udy1', 'age':24, 'address':'Ставропольский край', 'telephone':'+78005553535', 'responsible_id' : 1},
+        {'role_id':rolesid[2], 'l_name':'Сизякина', 'name':'Виктория', 'login':'v.sizyakina', 'passwd':'bestgirlforever', 'age':19, 'address':'ул. Ставропольская, д. 13', 'telephone':'+799128ve980', 'responsible_id' : 3},
+        {'role_id':rolesid[2], 'l_name':'Иванов', 'name':'Владимир', 'login':'v.ivanov', 'passwd':'12ioh8doh1', 'age':20, 'address':'ул. 50 лет ВЛКСМ, д. 55', 'telephone':'+79562543381', 'responsible_id' : 3},
+        {'role_id':rolesid[2], 'l_name':'Финансов', 'name':'Министр', 'login':'m.finansov', 'passwd':'EtoNastoysheeImya', 'age':666, 'address':'ул. Первомайская, д.64', 'telephone':'+79862731584', 'responsible_id' : 3},
+        {'role_id':rolesid[2], 'l_name':'Денисов', 'name':'Игорь', 'login':'i.denisov', 'passwd':'ProstoDED2021', 'age':34, 'address':'ул. В самое сердечко, д. 1', 'telephone':'+79280006688', 'responsible_id' : 3},
+        {'role_id':rolesid[2], 'l_name':'Комаров', 'name':'Анатолий', 'login':'a.komarov', 'passwd':'qopwjd81jds81H', 'age':54, 'address':'ул. Симметричная, д.182', 'telephone':'+79654705834', 'responsible_id' : 3},
+        {'role_id':rolesid[3], 'l_name':'Степанян', 'name':'Ваган', 'login':'v.stepanyan', 'passwd':'EasterEgg', 'age':22, 'address':'Москва', 'telephone':'+82695730656', 'responsible_id' : 6},
+        {'role_id':rolesid[3], 'l_name':'Первышев', 'name':'Роман', 'login':'r.pervishev', 'passwd':'JlirA_PyK0}|[0TT0B', 'age':18, 'address':'ул. Мира, д.212', 'telephone':'+72680390000', 'responsible_id' : 4},
+        {'role_id':rolesid[3], 'l_name':'Самохин', 'name':'Александр', 'login':'a.samohin', 'passwd':'Bro', 'age':27, 'address':'ул. ГТО, д.999', 'telephone':'+77777777777', 'responsible_id' : 5}
+    ]
+
+    User.insert_many(users).execute()
