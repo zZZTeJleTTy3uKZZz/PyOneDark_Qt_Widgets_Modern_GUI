@@ -1,18 +1,18 @@
 from models import *
 
-with db:
-   #  db.create_tables([Role, User, Storonnik, E_type, Event, Action, Task, Kpi_type, Kpi, Quote])
 
+def create_role():
     # Роли в структуре
-    # roles = [
-    #     {'name':'Администратор'},
-    #     {'name':'Секретарь РО'},
-    #     {'name':'Бригадир'},
-    #     {'name':'Кандидат'}
-    # ]
+    roles = [
+        {'name':'Администратор'},
+        {'name':'Секретарь РО'},
+        {'name':'Бригадир'},
+        {'name':'Кандидат'}
+    ]
 
-    # Role.insert_many(roles).execute()
+    Role.insert_many(roles).execute()
 
+def create_user():
     rolesid = Role.select()
     users = [
         {'role_id':rolesid[0], 'l_name':'Тест', 'name':'Тестович', 'login':'1', 'passwd':'1', 'age':19, 'address':'ул. Бруснева, д.12', 'telephone':'+79288201158', 'responsible_id' : 1},
@@ -29,3 +29,22 @@ with db:
     ]
 
     User.insert_many(users).execute()
+
+
+def create_loyality():
+    loyality = [
+        {'name':'1 касание'},
+        {'name':'1 мероприятие'},
+        {'name':'Поддерживает'},
+        {'name':'Активничает'},
+        {'name':'Придёт голосовать'}
+    ]
+
+    Loyality.insert_many(loyality).execute()
+
+
+with db:
+    db.create_tables([Role, User, Storonnik, E_type, Event, Action, Kpi, Quote, Loyality])
+    create_role()
+    create_user()
+    create_loyality()

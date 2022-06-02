@@ -1,6 +1,6 @@
 from peewee import *
 
-db = SqliteDatabase('nl.db')
+db = SqliteDatabase('nl_2.db')
 
 
 class BaseModel(Model):
@@ -25,25 +25,33 @@ class User(BaseModel):
     l_name = CharField(30)
     name = CharField(30)
     age = IntegerField(3)
-    address = CharField()
+    address = CharField(null=True)
     telephone = CharField(12)
     responsible_id = CharField()
-    photo = BlobField()
-    photo_path = CharField()
+    photo = BlobField(null=True)
+    photo_path = CharField(null=True)
 
     class Meta:
         db_table = 'users'
+
+
+class Loyality(BaseModel):
+   name = CharField()
+
+   class Meta():
+      db_table = 'loyalitys'
 
 
 class Storonnik(BaseModel):
     l_name = CharField(30)
     name = CharField(30)
     age = IntegerField(3)
-    address = CharField()
+    address = CharField(null=True)
     telephone = CharField(12)
-    social_media = CharField()
+    social_media = CharField(null=True)
     responsible = ForeignKeyField(User)
-    desc = CharField()
+    loyalty = ForeignKeyField(Loyality)
+    desc = CharField(null=True)
 
     class Meta:
         db_table = 'storonniks'
@@ -59,9 +67,9 @@ class E_type(BaseModel):
 class Event(BaseModel):
     e_type = ForeignKeyField(E_type)
     name = CharField()
-    budget = IntegerField()
+    budget = IntegerField(null=True)
     responsible = ForeignKeyField(User)
-    desc = TextField()
+    desc = TextField(null=True)
 
     class Meta:
         db_table = 'events'
@@ -70,38 +78,20 @@ class Event(BaseModel):
 class Action(BaseModel):
     event = ForeignKeyField(Event)
     storonnik = ForeignKeyField(Storonnik)
-    address = CharField()
-    date = DateTimeField()
-    desc = TextField()
+    address = CharField(null=True)
+    date = DateTimeField(null=True)
+    desc = TextField(null=True)
 
     class Meta:
         db_table = 'actions'
 
 
-class Task(BaseModel):
-    name = CharField()
-    deadline = DateTimeField()
-    owner = ForeignKeyField(User)
-    obj = ForeignKeyField(User)
-    desc = TextField()
-
-    class Meta:
-        db_table = 'tasks'
-
-
-class Kpi_type(BaseModel):
-    name = CharField()
-
-    class Meta:
-        db_table = 'kpi_types'
-
 class Kpi(BaseModel):
     name = CharField()
-    type_ = ForeignKeyField(Kpi_type)
     count = IntegerField()
-    deadline = DateTimeField()
+    deadline = DateTimeField(null=True)
     obj = ForeignKeyField(User)
-    desc = TextField()
+    desc = TextField(null=True)
 
     class Meta:
         db_table = 'kpis'

@@ -85,9 +85,17 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.deselect_all_tab()
 
         # Get Title Bar Btn And Reset Active
-        top_settings = MainFunctions.get_title_bar_btn(
-            self, "btn_top_settings")
+        top_settings = MainFunctions.get_title_bar_btn(self, "btn_top_settings")
         top_settings.set_active(False)
+        top_add = MainFunctions.get_title_bar_btn(self, "btn_top_add")
+        top_add.set_active(False)
+        top_edit = MainFunctions.get_title_bar_btn(self, "btn_top_edit")
+        top_edit.set_active(False)
+        top_delete = MainFunctions.get_title_bar_btn(self, "btn_top_delete")
+        top_delete.set_active(False)
+        top_export = MainFunctions.get_title_bar_btn(self, "btn_top_export")
+        top_export.set_active(False)
+        
 
         # LEFT MENU
         # ///////////////////////////////////////////////////////////////
@@ -101,12 +109,29 @@ class MainWindow(QMainWindow):
             MainFunctions.set_page(self, self.ui.load_pages.page_1)
 
         # WIDGETS BTN
-        if btn.objectName() == "btn_widgets":
+        if btn.objectName() == "btn_team":
             # Select Menu
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load Page 2
             MainFunctions.set_page(self, self.ui.load_pages.page_2)
+
+
+        if btn.objectName() == "delete_btn":
+            self.ui.left_menu.select_only_one(btn.objectName())
+
+            # Load Page 1
+            MainFunctions.set_page(self, self.ui.load_pages.page_1)
+
+
+
+
+
+
+
+
+
+
 
         # LOAD USER PAGE
         if btn.objectName() == "btn_add_user":
@@ -117,7 +142,7 @@ class MainWindow(QMainWindow):
             MainFunctions.set_page(self, self.ui.load_pages.page_3)
 
         # BOTTOM INFORMATION
-        if btn.objectName() == "btn_info":
+        if btn.objectName() == "btn_profile":
             # CHECK IF LEFT COLUMN IS VISIBLE
             if not MainFunctions.left_column_is_visible(self):
                 self.ui.left_menu.select_only_one_tab(btn.objectName())
@@ -143,7 +168,7 @@ class MainWindow(QMainWindow):
                 )
 
         # SETTINGS LEFT
-        if btn.objectName() == "btn_settings" or btn.objectName() == "btn_close_left_column":
+        if btn.objectName() == "btn_leave" or btn.objectName() == "btn_close_left_column":
             # CHECK IF LEFT COLUMN IS VISIBLE
             if not MainFunctions.left_column_is_visible(self):
                 # Show / Hide
@@ -194,22 +219,67 @@ class MainWindow(QMainWindow):
 
         if btn.objectName() == "btn_search":
             # Скрытие и раскрытие левого меню
-            top_info = MainFunctions.get_title_bar_btn(
-            self, "btn_info")
-            if self.ui.left_menu.menu.top_info.isVisible():
-                self.ui.left_menu.menu.top_info.hide()
+            # profile = MainFunctions.get_title_bar_btn(self, "btn_profile")
+            # profile.hide()
             # if self.ui.left_menu.isVisible():
             #     self.ui.left_menu_frame.setMinimumSize(0,0)
             #     self.ui.left_menu.hide()
-            #     print('Скрыто')
             # else:
             #     left_menu_margin = self.settings["left_menu_content_margins"]
             #     left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
             #     self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
             #     self.ui.left_menu.show()
-            #     print('Показано')
-
+            null
         # DEBUG
+
+        if btn.objectName() == "btn_top_add":
+            self.ui.left_menu.show()
+            left_menu_margin = self.settings["left_menu_content_margins"]
+            left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
+            self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
+            
+            # Toogle Active
+            if not MainFunctions.right_column_is_visible(self):
+                btn.set_active(True)
+
+                # Show / Hide
+                MainFunctions.toggle_right_column(self)
+            else:
+                btn.set_active(False)
+
+                # Show / Hide
+                MainFunctions.toggle_right_column(self)
+
+            # Get Left Menu Btn
+            top_settings = MainFunctions.get_left_menu_btn(
+                self, "btn_top_add")
+            top_settings.set_active_tab(False)
+
+
+        if btn.objectName() == "btn_top_edit":
+            self.ui.left_menu.show()
+            left_menu_margin = self.settings["left_menu_content_margins"]
+            left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
+            self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
+            
+            # Toogle Active
+            if not MainFunctions.right_column_is_visible(self):
+                btn.set_active(True)
+
+                # Show / Hide
+                MainFunctions.toggle_right_column(self)
+            else:
+                btn.set_active(False)
+
+                # Show / Hide
+                MainFunctions.toggle_right_column(self)
+
+            # Get Left Menu Btn
+            top_settings = MainFunctions.get_left_menu_btn(
+                self, "btn_top_edit")
+            top_settings.set_active_tab(False)
+
+
         print(f"Button {btn.objectName()}, clicked!")
 
     # LEFT MENU BTN IS RELEASED

@@ -74,7 +74,7 @@ class UI_MainWindow(object):
         # SET CENTRAL WIDGET
         # Add central widget to app
         # ///////////////////////////////////////////////////////////////
-        self.central_widget = QWidget()
+        self.central_widget = PyPage()
         self.central_widget.setStyleSheet(f'''
             font: {self.settings["font"]["text_size"]}pt "{self.settings["font"]["family"]}";
             color: {self.themes["app_color"]["text_foreground"]};
@@ -304,3 +304,4 @@ class UI_MainWindow(object):
         # ADD CENTRAL WIDGET AND SET CONTENT MARGINS
         # ///////////////////////////////////////////////////////////////
         parent.setCentralWidget(self.central_widget)
+

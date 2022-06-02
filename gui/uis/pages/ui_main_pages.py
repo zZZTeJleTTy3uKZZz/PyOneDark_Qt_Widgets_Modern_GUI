@@ -1,29 +1,29 @@
-# ///////////////////////////////////////////////////////////////
-#
-# BY: WANDERSON M.PIMENTA
-# PROJECT MADE WITH: Qt Designer and PySide6
-# V: 1.0.0
-#
-# This project can be used freely for all uses, as long as they maintain the
-# respective credits only in the Python scripts, any information in the visual
-# interface (GUI) can be modified without any implication.
-#
-# There are limitations on Qt licenses if you want to use your products
-# commercially, I recommend reading them on the official website:
-# https://doc.qt.io/qtforpython/licenses.html
-#
-# ///////////////////////////////////////////////////////////////
+# -*- coding: utf-8 -*-
 
-# IMPORT QT CORE
-# ///////////////////////////////////////////////////////////////
-from qt_core import *
+################################################################################
+## Form generated from reading UI file 'main_pages.ui'
+##
+## Created by: Qt User Interface Compiler version 6.3.0
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
 
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QStackedWidget, QVBoxLayout, QWidget)
 
 class Ui_MainPages(object):
     def setupUi(self, MainPages):
         if not MainPages.objectName():
             MainPages.setObjectName(u"MainPages")
-        MainPages.resize(860, 600)
+        MainPages.resize(860, 456)
         self.main_pages_layout = QVBoxLayout(MainPages)
         self.main_pages_layout.setSpacing(0)
         self.main_pages_layout.setObjectName(u"main_pages_layout")
@@ -66,6 +66,7 @@ class Ui_MainPages(object):
 
         self.center_page_layout.addWidget(self.label)
 
+
         self.page_1_layout.addWidget(self.welcome_base, 0, Qt.AlignHCenter)
 
         self.pages.addWidget(self.page_1)
@@ -84,7 +85,7 @@ class Ui_MainPages(object):
         self.scroll_area.setWidgetResizable(True)
         self.contents = QWidget()
         self.contents.setObjectName(u"contents")
-        self.contents.setGeometry(QRect(0, 0, 840, 580))
+        self.contents.setGeometry(QRect(0, 0, 840, 436))
         self.contents.setStyleSheet(u"background: transparent;")
         self.verticalLayout = QVBoxLayout(self.contents)
         self.verticalLayout.setSpacing(15)
@@ -101,12 +102,9 @@ class Ui_MainPages(object):
 
         self.verticalLayout.addWidget(self.title_label)
 
-        self.description_label = QLabel(self.contents)
-        self.description_label.setObjectName(u"description_label")
-        self.description_label.setAlignment(Qt.AlignHCenter | Qt.AlignTop)
-        self.description_label.setWordWrap(True)
+        self.verticalSpacer = QSpacerItem(10, 15, QSizePolicy.Minimum, QSizePolicy.Maximum)
 
-        self.verticalLayout.addWidget(self.description_label)
+        self.verticalLayout.addItem(self.verticalSpacer)
 
         self.row_1_layout = QHBoxLayout()
         self.row_1_layout.setObjectName(u"row_1_layout")
@@ -115,6 +113,15 @@ class Ui_MainPages(object):
 
         self.row_2_layout = QHBoxLayout()
         self.row_2_layout.setObjectName(u"row_2_layout")
+        self.pushButton = QPushButton(self.contents)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setEnabled(True)
+        self.pushButton.setMinimumSize(QSize(100, 20))
+        self.pushButton.setStyleSheet(u"background-color: rgb(255, 255, 0);")
+        self.pushButton.setAutoDefault(False)
+
+        self.row_2_layout.addWidget(self.pushButton)
+
 
         self.verticalLayout.addLayout(self.row_2_layout)
 
@@ -141,8 +148,8 @@ class Ui_MainPages(object):
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
         self.page_3.setStyleSheet(u"QFrame {\n"
-                                  "	font-size: 16pt;\n"
-                                  "}")
+"	font-size: 16pt;\n"
+"}")
         self.page_3_layout = QVBoxLayout(self.page_3)
         self.page_3_layout.setObjectName(u"page_3_layout")
         self.empty_page_label = QLabel(self.page_3)
@@ -156,22 +163,20 @@ class Ui_MainPages(object):
 
         self.main_pages_layout.addWidget(self.pages)
 
+
         self.retranslateUi(MainPages)
 
-        self.pages.setCurrentIndex(0)
+        self.pages.setCurrentIndex(1)
+
 
         QMetaObject.connectSlotsByName(MainPages)
     # setupUi
 
     def retranslateUi(self, MainPages):
-        MainPages.setWindowTitle(
-            QCoreApplication.translate("MainPages", u"Form", None))
-        self.label.setText(QCoreApplication.translate(
-            "MainPages", u"Welcome To PyOneDark GUI", None))
-        self.title_label.setText(QCoreApplication.translate(
-            "MainPages", u"Custom Widgets Page", None))
-        self.description_label.setText(QCoreApplication.translate("MainPages", u"Here will be all the custom widgets, they will be added over time on this page.\n"
-                                                                  "I will try to always record a new tutorial when adding a new Widget and updating the project on Patreon before launching on GitHub and GitHub after the public release.", None))
-        self.empty_page_label.setText(
-            QCoreApplication.translate("MainPages", u"Empty Page", None))
+        MainPages.setWindowTitle(QCoreApplication.translate("MainPages", u"Form", None))
+        self.label.setText(QCoreApplication.translate("MainPages", u"Welcome To PyOneDark GUI", None))
+        self.title_label.setText(QCoreApplication.translate("MainPages", u"\u041a\u043e\u043c\u0430\u043d\u0434\u0430 \u0421\u0442\u0430\u0432\u0440\u043e\u043f\u043e\u043b\u044c\u0441\u043a\u043e\u0433\u043e \u043a\u0440\u0430\u044f", None))
+        self.pushButton.setText(QCoreApplication.translate("MainPages", u"PushButton", None))
+        self.empty_page_label.setText(QCoreApplication.translate("MainPages", u"Empty Page", None))
     # retranslateUi
+
