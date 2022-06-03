@@ -17,8 +17,8 @@
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////////////////////////
 from gui.widgets.py_table_widget.py_table_widget import PyTableWidget
-from . functions_main_window import *
-from . db_func import *
+from .functions_main_window import *
+from .db_func import *
 import sys
 import os
 
@@ -41,11 +41,16 @@ from gui.widgets import *
 
 # LOAD UI MAIN
 # ///////////////////////////////////////////////////////////////
-from . ui_main import *
+from .ui_main import *
 
 # MAIN FUNCTIONS 
 # ///////////////////////////////////////////////////////////////
-from . functions_main_window import *
+from .functions_main_window import *
+
+
+
+
+
 
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
@@ -64,7 +69,7 @@ class SetupMainWindow:
         {
             "btn_icon" : "icon_home.svg",
             "btn_id" : "btn_home",
-            "btn_text" : "На главную",
+            "btn_text" : "только не на лицо",
             "btn_tooltip" : "Главная страница",
             "show_top" : True,
             "is_active" : True
@@ -88,8 +93,8 @@ class SetupMainWindow:
         {
             "btn_icon" : "_icon_leave.svg",
             "btn_id" : "btn_leave",
-            "btn_text" : "Выйти из учётной записи",
-            "btn_tooltip" : "Выход",
+            "btn_text" : "Выйти из очка",
+            "btn_tooltip" : "Очко",
             "show_top" : False,
             "is_active" : False
         }
@@ -98,30 +103,6 @@ class SetupMainWindow:
      # ADD TITLE BAR MENUS
     # ///////////////////////////////////////////////////////////////
     add_title_bar_menus = [
-        {
-            "btn_icon" : "_icon_add.svg",
-            "btn_id" : "btn_top_add",
-            "btn_tooltip" : "Создать запись",
-            "is_active" : False
-        },
-        {
-            "btn_icon" : "_icon_edit.svg",
-            "btn_id" : "btn_top_edit",
-            "btn_tooltip" : "Редактировать запись",
-            "is_active" : False
-        },
-        {
-            "btn_icon" : "_icon_delete.svg",
-            "btn_id" : "btn_top_delete",
-            "btn_tooltip" : "Удалить запись",
-            "is_active" : False
-        },
-        {
-            "btn_icon" : "_icon_export.svg",
-            "btn_id" : "btn_top_export",
-            "btn_tooltip" : "Экспорт в таблицу",
-            "is_active" : False
-        },
         {
             "btn_icon" : "icon_search.svg",
             "btn_id" : "btn_search",
@@ -132,7 +113,7 @@ class SetupMainWindow:
             "btn_icon" : "icon_settings.svg",
             "btn_id" : "btn_top_settings",
             "btn_tooltip" : "Top settings",
-            "is_active" : False
+            "is_active" : True
         }
     ]
 
@@ -147,6 +128,9 @@ class SetupMainWindow:
         elif self.ui.left_column.sender() != None:
             return self.ui.left_column.sender()
 
+
+
+    
     # SETUP MAIN WINDOW WITH CUSTOM PARAMETERS
     # ///////////////////////////////////////////////////////////////
     def setup_gui(self):
@@ -202,19 +186,17 @@ class SetupMainWindow:
         self.ui.left_column.released.connect(self.btn_released)
 
 
-        # self.ui.load_pages.page_2.clicked.connect(print("Yes"))
-        # self.ui.load_pages.page_2.released.connect(self.btn_released)
 
         # SET INITIAL PAGE / SET LEFT AND RIGHT COLUMN MENUS
         # ///////////////////////////////////////////////////////////////
-        MainFunctions.set_page(self, self.ui.load_pages.page_1)
+        MainFunctions.set_page(self, self.ui.load_pages.p_team)
         MainFunctions.set_left_column_menu(
             self,
             menu = self.ui.left_column.menus.menu_1,
             title = "Settings Left Column",
             icon_path = Functions.set_svg_icon("icon_settings.svg")
         )
-        MainFunctions.set_right_column_menu(self, self.ui.right_column.menu_1)
+        MainFunctions.set_right_column_menu(self, self.ui.right_column.users_menu)
 
         # ///////////////////////////////////////////////////////////////
         # EXAMPLE CUSTOM WIDGETS
@@ -243,61 +225,66 @@ class SetupMainWindow:
         # ///////////////////////////////////////////////////////////////
         themes = Themes()
         self.themes = themes.items
+        
+        # ////////////////////////////////////////////////////////////////
+        #                              Авторизация
+        # ////////////////////////////////////////////////////////////////
+       
+       
+       
+       
+        # ////////////////////////////////////////////////////////////////
+        #                              Главная
+        # ////////////////////////////////////////////////////////////////
 
-        # LEFT COLUMN
-        # ///////////////////////////////////////////////////////////////
-
-        # BTN 1
-        self.left_btn_1 = PyPushButton(
-            text="Btn 1",
-            radius=8,
-            color=self.themes["app_color"]["text_foreground"],
-            bg_color=self.themes["app_color"]["dark_one"],
-            bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
-        )
-        self.left_btn_1.setMaximumHeight(40)
-        self.ui.left_column.menus.btn_1_layout.addWidget(self.left_btn_1)
-
-        # BTN 2
-        self.left_btn_2 = PyPushButton(
-            text="Btn With Icon",
-            radius=8,
-            color=self.themes["app_color"]["text_foreground"],
-            bg_color=self.themes["app_color"]["dark_one"],
-            bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
-        )
-        self.icon = QIcon(Functions.set_svg_icon("icon_settings.svg"))
-        self.left_btn_2.setIcon(self.icon)
-        self.left_btn_2.setMaximumHeight(40)
-        self.ui.left_column.menus.btn_2_layout.addWidget(self.left_btn_2)
-
-        # BTN 3 - Default QPushButton
-        self.left_btn_3 = QPushButton("Default QPushButton")
-        self.left_btn_3.setMaximumHeight(40)
-        self.ui.left_column.menus.btn_3_layout.addWidget(self.left_btn_3)
-
-        # PAGES
-        # ///////////////////////////////////////////////////////////////
-
-        # PAGE 1 - ADD LOGO TO MAIN PAGE
+        
+        # Добавление лого
         self.logo_svg = QSvgWidget(Functions.set_svg_image("logo_home.svg"))
         self.ui.load_pages.logo_layout.addWidget(self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
 
-        # PAGE 2
-        # CIRCULAR PROGRESS 1
-        self.circular_progress_1 = PyCircularProgress(
-            value = 100,
-            progress_color = self.themes["app_color"]["context_color"],
-            text_color = self.themes["app_color"]["text_title"],
-            font_size = 14,
-            bg_color = self.themes["app_color"]["dark_four"]
-        )
-        self.circular_progress_1.setFixedSize(200,200)
+        self.bt = QPushButton("Нажми на меня")
+        def pr():
+            print(self.ui.credits.copyright_label.text())
 
+        self.bt.clicked.connect(lambda: pr())
 
-        # ICON BUTTON 1
+        self.ui.load_pages.logo_layout.addWidget(self.bt)
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Команда
+        # ////////////////////////////////////////////////////////////////
+
+        # Добавление кнопок
+        """
+        Хорошая попытка, но не сегодня(
+
+        add_btn_user = [
+        {
+            "btn_icon" : "_icon_add.svg",
+            "btn_id" : "btn_add_user",
+            "btn_tooltip" : "Создать запись",
+        },
+        {
+            "btn_icon" : "_icon_edit.svg",
+            "btn_id" : "btn_edit_user",
+            "btn_tooltip" : "Редактировать запись",
+        },
+        {
+            "btn_icon" : "_icon_delete.svg",
+            "btn_id" : "btn_del_user",
+            "btn_tooltip" : "Удалить запись",
+        },
+        {
+            "btn_icon" : "_icon_export.svg",
+            "btn_id" : "btn_export_user",
+            "btn_tooltip" : "Экспорт в таблицу",
+        }
+        ]
+
+        self.ui.set_btn(add_btn_user)
+        """
+
+        
         self.add_btn = PyIconButton(
             icon_path = Functions.set_svg_icon("_icon_add.svg"),
             parent = self,
@@ -316,7 +303,6 @@ class SetupMainWindow:
             bg_color_pressed = self.themes["app_color"]["pink"]
         )
 
-
         self.edit_btn = PyIconButton(
             icon_path = Functions.set_svg_icon("_icon_edit.svg"),
             parent = self,
@@ -332,7 +318,7 @@ class SetupMainWindow:
             icon_color_active = self.themes["app_color"]["icon_active"],
             bg_color = self.themes["app_color"]["dark_one"],
             bg_color_hover = self.themes["app_color"]["dark_three"],
-            bg_color_pressed = self.themes["app_color"]["pink"]
+            bg_color_pressed = self.themes["app_color"]["yellow"]
         )
 
         self.delete_btn = PyIconButton(
@@ -353,10 +339,6 @@ class SetupMainWindow:
             bg_color_pressed = self.themes["app_color"]["pink"]
         )
         
-
-
-       
-
         self.export_btn = PyIconButton(
             icon_path = Functions.set_svg_icon("_icon_export.svg"),
             parent = self,
@@ -374,143 +356,11 @@ class SetupMainWindow:
             bg_color_hover = self.themes["app_color"]["dark_three"],
             bg_color_pressed = self.themes["app_color"]["pink"]
         )
-        # ICON BUTTON 2
-        self.icon_button_2 = PyIconButton(
-            icon_path = Functions.set_svg_icon("icon_add_user.svg"),
-            parent = self,
-            app_parent = self.ui.central_widget,
-            tooltip_text = "BTN with tooltip",
-            width = 30,
-            height = 30,
-            radius = 8,
-            dark_one = self.themes["app_color"]["dark_one"],
-            icon_color = self.themes["app_color"]["icon_color"],
-            icon_color_hover = self.themes["app_color"]["icon_hover"],
-            icon_color_pressed = self.themes["app_color"]["white"],
-            icon_color_active = self.themes["app_color"]["icon_active"],
-            bg_color = self.themes["app_color"]["dark_one"],
-            bg_color_hover = self.themes["app_color"]["dark_three"],
-            bg_color_pressed = self.themes["app_color"]["green"],
-        )
-
-        # ICON BUTTON 3
-        self.icon_button_3 = PyIconButton(
-            icon_path = Functions.set_svg_icon("icon_add_user.svg"),
-            parent = self,
-            app_parent = self.ui.central_widget,
-            tooltip_text = "BTN actived! (is_actived = True)",
-            width = 40,
-            height = 40,
-            radius = 8,
-            dark_one = self.themes["app_color"]["dark_one"],
-            icon_color = self.themes["app_color"]["icon_color"],
-            icon_color_hover = self.themes["app_color"]["icon_hover"],
-            icon_color_pressed = self.themes["app_color"]["white"],
-            icon_color_active = self.themes["app_color"]["icon_active"],
-            bg_color = self.themes["app_color"]["dark_one"],
-            bg_color_hover = self.themes["app_color"]["dark_three"],
-            bg_color_pressed = self.themes["app_color"]["context_color"],
-            is_active = True
-        )
-
-        # PUSH BUTTON 1
-        self.push_button_1 = PyPushButton(
-            text = "Button Without Icon",
-            radius  =8,
-            color = self.themes["app_color"]["text_foreground"],
-            bg_color = self.themes["app_color"]["dark_one"],
-            bg_color_hover = self.themes["app_color"]["dark_three"],
-            bg_color_pressed = self.themes["app_color"]["dark_four"]
-        )
-        self.push_button_1.setMinimumHeight(40)
-
-        # PUSH BUTTON 2
-        self.push_button_2 = PyPushButton(
-            text = "Button With Icon",
-            radius = 8,
-            color = self.themes["app_color"]["text_foreground"],
-            bg_color = self.themes["app_color"]["dark_one"],
-            bg_color_hover = self.themes["app_color"]["dark_three"],
-            bg_color_pressed = self.themes["app_color"]["dark_four"]
-        )
-        self.icon_2 = QIcon(Functions.set_svg_icon("icon_settings.svg"))
-        self.push_button_2.setMinimumHeight(40)
-        self.push_button_2.setIcon(self.icon_2)
-
-        # PY LINE EDIT
-        self.line_edit = PyLineEdit(
-            text = "",
-            place_holder_text = "Поиск",
-            radius = 8,
-            border_size = 2,
-            color = self.themes["app_color"]["text_foreground"],
-            selection_color = self.themes["app_color"]["white"],
-            bg_color = self.themes["app_color"]["dark_one"],
-            bg_color_active = self.themes["app_color"]["dark_three"],
-            context_color = self.themes["app_color"]["context_color"]
-        )
-        self.line_edit.setMinimumHeight(40)
-
-        self.line_edit_l_name = PyLineEdit(
-            text = "",
-            place_holder_text = "Фамилия",
-            radius = 8,
-            border_size = 2,
-            color = self.themes["app_color"]["text_foreground"],
-            selection_color = self.themes["app_color"]["white"],
-            bg_color = self.themes["app_color"]["dark_one"],
-            bg_color_active = self.themes["app_color"]["dark_three"],
-            context_color = self.themes["app_color"]["context_color"]
-        )
-        self.line_edit_l_name.setMinimumHeight(40)
-
-        self.line_edit_name = PyLineEdit(
-            text = "",
-            place_holder_text = "Имя",
-            radius = 8,
-            border_size = 2,
-            color = self.themes["app_color"]["text_foreground"],
-            selection_color = self.themes["app_color"]["white"],
-            bg_color = self.themes["app_color"]["dark_one"],
-            bg_color_active = self.themes["app_color"]["dark_three"],
-            context_color = self.themes["app_color"]["context_color"]
-        )
-        self.line_edit_name.setMinimumHeight(40)
-
-        self.line_edit_login = PyLineEdit(
-            text = "",
-            place_holder_text = "Логин",
-            radius = 8,
-            border_size = 2,
-            color = self.themes["app_color"]["text_foreground"],
-            selection_color = self.themes["app_color"]["white"],
-            bg_color = self.themes["app_color"]["dark_one"],
-            bg_color_active = self.themes["app_color"]["dark_three"],
-            context_color = self.themes["app_color"]["context_color"]
-        )
-        self.line_edit_login.setMinimumHeight(40)
 
 
+        # Добавление таблицы
 
-
-
-
-
-
-
-
-
-
-        # TOGGLE BUTTON
-        self.toggle_button = PyToggle(
-            width = 50,
-            bg_color = self.themes["app_color"]["dark_two"],
-            circle_color = self.themes["app_color"]["icon_color"],
-            active_color = self.themes["app_color"]["context_color"]
-        )
-
-        # TABLE WIDGETS
-        self.table_widget = PyTableWidget(
+        self.table_user = PyTableWidget(
             radius = 8,
             color = self.themes["app_color"]["text_foreground"],
             selection_color = self.themes["app_color"]["context_color"],
@@ -525,104 +375,122 @@ class SetupMainWindow:
         )
         
 
-        # Columns / Header
-        self.users = ("Фото", "Фамилия", "Имя", "Роль", "Логин", "Пароль", "Возраст", "Адрес", "Телефон", "Ответственный", "photo_path", "id_user")
-        colum_header(self.table_widget, self.users)  
-        load_rows(self.table_widget, User(), 'User')
-      
+        # Заполнение таблицы
+        self.users = ("Фото", "Фамилия", "име", "Роль", "Логин", "Пароль", "Возраст", "Адрес", "Телефон", "Ответственный", "photo_path", "id_user")
+        colum_header(self.table_user, self.users)  
+        load_rows(self.table_user, User(), 'User')
 
-        # ADD WIDGETS
-      #   self.ui.load_pages.row_1_layout.addWidget(self.circular_progress_1)
-      #   self.ui.load_pages.row_1_layout.addWidget(self.circular_progress_2)
-      #   self.ui.load_pages.row_1_layout.addWidget(self.circular_progress_3)
-      #   self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_1)
-      #   self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_2)
-      #   self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_3)
-      #   self.ui.load_pages.row_2_layout.addWidget(self.vertical_slider_4)
-        # self.ui.load_pages.row_3_layout.addWidget(self.icon_button_1)
-        # self.ui.load_pages.row_3_layout.addWidget(self.icon_button_3)
-        
-        # self.ui.load_pages.row_3_layout.addWidget(self.push_button_2)
-        # self.ui.load_pages.row_3_layout.addWidget(self.toggle_button)
-        
-        self.ui.load_pages.row_1_layout.addWidget(self.table_widget)
 
-        self.button = QPushButton("Lol")
-        self.button.setMaximumHeight(40)
-        self.ui.credits.copyright_label.setText("Точно")
-        self.ui.load_pages.title_label.setText("Lol")
+        # Поиск
 
-        def printed():
+        self.find_l = PyLineEdit(
+            text = "",
+            place_holder_text = "Поиск",
+            radius = 8,
+            border_size = 2,
+            color = self.themes["app_color"]["text_foreground"],
+            selection_color = self.themes["app_color"]["white"],
+            bg_color = self.themes["app_color"]["dark_one"],
+            bg_color_active = self.themes["app_color"]["dark_three"],
+            context_color = self.themes["app_color"]["context_color"]
+        )
+        self.find_l.setMinimumHeight(40)
+
+        # Добавление объектов на главный пэйдж
+        self.ui.load_pages.row_1_layout.addWidget(self.table_user)
+        self.ui.load_pages.row_2_layout.addWidget(self.add_btn)
+        self.ui.load_pages.row_2_layout.addWidget(self.edit_btn)
+        self.ui.load_pages.row_2_layout.addWidget(self.delete_btn)
+        self.ui.load_pages.row_2_layout.addWidget(self.export_btn)
+        self.ui.load_pages.row_2_layout.addWidget(self.find_l)
+
+
+        # Функции
+
+        def open_team_p():
 
             MainFunctions.set_page(self, self.ui.load_pages.page_1)
 
-        self.button.clicked.connect(lambda: printed())
-        self.add_btn.clicked.connect(lambda: printed())
-        # self.ui.load_pages.row_2_layout.pushButton.clicked.connect(print("Da"))
+        self.add_btn.clicked.connect(lambda: open_team_p())
 
 
 
+        # ------------------------------------------
+        #               Правое меню
+        # ------------------------------------------
 
-        self.ui.load_pages.row_2_layout.addWidget(self.button)
-        self.ui.load_pages.row_2_layout.addWidget(self.add_btn)
-        # self.ui.load_pages.row_2_layout.addWidget(self.edit_btn)
-        # self.ui.load_pages.row_2_layout.addWidget(self.delete_btn)
-        # self.ui.load_pages.row_2_layout.addWidget(self.export_btn)
-        # self.ui.load_pages.row_2_layout.addWidget(self.line_edit)
-
-
-        # RIGHT COLUMN
-        # ///////////////////////////////////////////////////////////////
-
-        # BTN 1
-        self.right_btn_1 = PyPushButton(
-            text="Show Menu 2",
-            radius=8,
-            color=self.themes["app_color"]["text_foreground"],
-            bg_color=self.themes["app_color"]["dark_one"],
-            bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        # Создание инпутов
+        self.l_l_name = PyLineEdit(
+            text = "",
+            place_holder_text = "Фамилия",
+            radius = 8,
+            border_size = 2,
+            color = self.themes["app_color"]["text_foreground"],
+            selection_color = self.themes["app_color"]["white"],
+            bg_color = self.themes["app_color"]["dark_one"],
+            bg_color_active = self.themes["app_color"]["dark_three"],
+            context_color = self.themes["app_color"]["context_color"]
         )
-        self.icon_right = QIcon(Functions.set_svg_icon("icon_arrow_right.svg"))
-        self.right_btn_1.setIcon(self.icon_right)
-        self.right_btn_1.setMaximumHeight(40)
-        self.right_btn_1.clicked.connect(lambda: MainFunctions.set_right_column_menu(
-            self,
-            self.ui.right_column.menu_2
-        ))
-        self.ui.right_column.btn_1_layout.addWidget(self.right_btn_1)
+        self.l_l_name.setMinimumHeight(40)
 
-        # BTN 2
-        self.right_btn_2 = PyPushButton(
-            text="Show Menu 1",
-            radius=8,
-            color=self.themes["app_color"]["text_foreground"],
-            bg_color=self.themes["app_color"]["dark_one"],
-            bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        self.l_name = PyLineEdit(
+            text = "",
+            place_holder_text = "Имя",
+            radius = 8,
+            border_size = 2,
+            color = self.themes["app_color"]["text_foreground"],
+            selection_color = self.themes["app_color"]["white"],
+            bg_color = self.themes["app_color"]["dark_one"],
+            bg_color_active = self.themes["app_color"]["dark_three"],
+            context_color = self.themes["app_color"]["context_color"]
         )
-        self.icon_left = QIcon(Functions.set_svg_icon("icon_arrow_left.svg"))
-        self.right_btn_2.setIcon(self.icon_left)
-        self.right_btn_2.setMaximumHeight(40)
-        self.right_btn_2.clicked.connect(lambda: MainFunctions.set_right_column_menu(
-            self,
-            self.ui.right_column.menu_1
-        ))
-        self.ui.right_column.btn_2_layout.addWidget(self.right_btn_2)
-        self.ui.right_column.line_edit_l_name_layout.addWidget(self.line_edit_l_name)
-        self.ui.right_column.line_edit_name_layout.addWidget(self.line_edit_name)
-        self.ui.right_column.line_edit_login_layout.addWidget(self.line_edit_login)
+        self.l_name.setMinimumHeight(40)
+
+        self.l_login = PyLineEdit(
+            text = "",
+            place_holder_text = "Логин",
+            radius = 8,
+            border_size = 2,
+            color = self.themes["app_color"]["text_foreground"],
+            selection_color = self.themes["app_color"]["white"],
+            bg_color = self.themes["app_color"]["dark_one"],
+            bg_color_active = self.themes["app_color"]["dark_three"],
+            context_color = self.themes["app_color"]["context_color"]
+        )
+        self.l_login.setMinimumHeight(40)
 
 
-        self.bt = QPushButton("Нажми на меня")
-        def pr():
-            print(self.ui.credits.copyright_label.text())
-
-        self.bt.clicked.connect(pr())
-
-        self.ui.load_pages.logo_layout.addWidget(self.bt)
+        #  Добавление элементов на правое меню
+        self.ui.right_column.l_name__l.addWidget(self.l_l_name)
+        self.ui.right_column.name__l.addWidget(self.l_name)
+        self.ui.right_column.login__l.addWidget(self.l_login)
 
 
+        
+
+
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Сторонники
+        # ////////////////////////////////////////////////////////////////
+
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Мероприятия
+        # ////////////////////////////////////////////////////////////////
+
+
+        # ////////////////////////////////////////////////////////////////
+        #                              KPI
+        # ////////////////////////////////////////////////////////////////
+
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Цитаты
+        # ////////////////////////////////////////////////////////////////
+
+
+        
 
 
         # ///////////////////////////////////////////////////////////////
@@ -642,6 +510,3 @@ class SetupMainWindow:
             self.bottom_left_grip.setGeometry(5, self.height() - 20, 15, 15)
             self.bottom_right_grip.setGeometry(self.width() - 20, self.height() - 20, 15, 15)
 
-
-    
-    

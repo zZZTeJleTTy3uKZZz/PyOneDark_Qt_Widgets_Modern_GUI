@@ -87,14 +87,7 @@ class MainWindow(QMainWindow):
         # Get Title Bar Btn And Reset Active
         top_settings = MainFunctions.get_title_bar_btn(self, "btn_top_settings")
         top_settings.set_active(False)
-        top_add = MainFunctions.get_title_bar_btn(self, "btn_top_add")
-        top_add.set_active(False)
-        top_edit = MainFunctions.get_title_bar_btn(self, "btn_top_edit")
-        top_edit.set_active(False)
-        top_delete = MainFunctions.get_title_bar_btn(self, "btn_top_delete")
-        top_delete.set_active(False)
-        top_export = MainFunctions.get_title_bar_btn(self, "btn_top_export")
-        top_export.set_active(False)
+
         
 
         # LEFT MENU
@@ -114,7 +107,7 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load Page 2
-            MainFunctions.set_page(self, self.ui.load_pages.page_2)
+            MainFunctions.set_page(self, self.ui.load_pages.p_team)
 
 
         if btn.objectName() == "delete_btn":
@@ -229,7 +222,7 @@ class MainWindow(QMainWindow):
             #     left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
             #     self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
             #     self.ui.left_menu.show()
-            null
+            pass
         # DEBUG
 
         if btn.objectName() == "btn_top_add":

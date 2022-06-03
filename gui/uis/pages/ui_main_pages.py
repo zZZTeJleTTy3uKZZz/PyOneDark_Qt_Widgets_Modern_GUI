@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QStackedWidget, QVBoxLayout, QWidget)
+    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
+    QVBoxLayout, QWidget)
 
 class Ui_MainPages(object):
     def setupUi(self, MainPages):
@@ -70,13 +70,13 @@ class Ui_MainPages(object):
         self.page_1_layout.addWidget(self.welcome_base, 0, Qt.AlignHCenter)
 
         self.pages.addWidget(self.page_1)
-        self.page_2 = QWidget()
-        self.page_2.setObjectName(u"page_2")
-        self.page_2_layout = QVBoxLayout(self.page_2)
-        self.page_2_layout.setSpacing(5)
-        self.page_2_layout.setObjectName(u"page_2_layout")
-        self.page_2_layout.setContentsMargins(5, 5, 5, 5)
-        self.scroll_area = QScrollArea(self.page_2)
+        self.p_team = QWidget()
+        self.p_team.setObjectName(u"p_team")
+        self.p_team__l = QVBoxLayout(self.p_team)
+        self.p_team__l.setSpacing(5)
+        self.p_team__l.setObjectName(u"p_team__l")
+        self.p_team__l.setContentsMargins(5, 5, 5, 5)
+        self.scroll_area = QScrollArea(self.p_team)
         self.scroll_area.setObjectName(u"scroll_area")
         self.scroll_area.setStyleSheet(u"background: transparent;")
         self.scroll_area.setFrameShape(QFrame.NoFrame)
@@ -113,15 +113,6 @@ class Ui_MainPages(object):
 
         self.row_2_layout = QHBoxLayout()
         self.row_2_layout.setObjectName(u"row_2_layout")
-        self.pushButton = QPushButton(self.contents)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setEnabled(True)
-        self.pushButton.setMinimumSize(QSize(100, 20))
-        self.pushButton.setStyleSheet(u"background-color: rgb(255, 255, 0);")
-        self.pushButton.setAutoDefault(False)
-
-        self.row_2_layout.addWidget(self.pushButton)
-
 
         self.verticalLayout.addLayout(self.row_2_layout)
 
@@ -142,9 +133,9 @@ class Ui_MainPages(object):
 
         self.scroll_area.setWidget(self.contents)
 
-        self.page_2_layout.addWidget(self.scroll_area)
+        self.p_team__l.addWidget(self.scroll_area)
 
-        self.pages.addWidget(self.page_2)
+        self.pages.addWidget(self.p_team)
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
         self.page_3.setStyleSheet(u"QFrame {\n"
@@ -176,7 +167,6 @@ class Ui_MainPages(object):
         MainPages.setWindowTitle(QCoreApplication.translate("MainPages", u"Form", None))
         self.label.setText(QCoreApplication.translate("MainPages", u"Welcome To PyOneDark GUI", None))
         self.title_label.setText(QCoreApplication.translate("MainPages", u"\u041a\u043e\u043c\u0430\u043d\u0434\u0430 \u0421\u0442\u0430\u0432\u0440\u043e\u043f\u043e\u043b\u044c\u0441\u043a\u043e\u0433\u043e \u043a\u0440\u0430\u044f", None))
-        self.pushButton.setText(QCoreApplication.translate("MainPages", u"PushButton", None))
         self.empty_page_label.setText(QCoreApplication.translate("MainPages", u"Empty Page", None))
     # retranslateUi
 

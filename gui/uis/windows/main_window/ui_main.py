@@ -36,7 +36,7 @@ from gui.widgets import *
 
 # IMPORT SETUP MAIN WINDOW
 # ///////////////////////////////////////////////////////////////
-from . setup_main_window import *
+from .setup_main_window import *
 
 # IMPORT MAIN WINDOW PAGES / AND SIDE BOXES FOR APP
 # ///////////////////////////////////////////////////////////////
@@ -53,6 +53,40 @@ from gui.widgets.py_credits_bar.py_credits import PyCredits
 # PY WINDOW
 # ///////////////////////////////////////////////////////////////
 class UI_MainWindow(object):
+    
+    """
+    def set_btn(self, parameters):
+        if parameters != None and len(parameters) > 0:
+            for parameter in parameters:
+                _btn_icon = Functions.set_svg_icon(parameter['btn_icon'])
+                _btn_id = parameter['btn_id']
+                _btn_tooltip = parameter['btn_tooltip']
+
+                self.btn =  PyIconButton(
+                    icon_path = Functions.set_svg_icon(_btn_icon),
+                    parent = self,
+                    app_parent = self.central_widget,
+                    btn_id = _btn_id,
+                    tooltip_text = _btn_tooltip,
+                    width = 36,
+                    height = 36,
+                    radius = 12,
+                    dark_one = self.themes["app_color"]["dark_one"],
+                    icon_color = self.themes["app_color"]["icon_color"],
+                    icon_color_hover = self.themes["app_color"]["icon_hover"],
+                    icon_color_pressed = self.themes["app_color"]["icon_active"],
+                    icon_color_active = self.themes["app_color"]["icon_active"],
+                    bg_color = self.themes["app_color"]["dark_one"],
+                    bg_color_hover = self.themes["app_color"]["dark_three"],
+                    bg_color_pressed = self.themes["app_color"]["pink"]
+                )
+                # self.btn.clicked.connect(self.btn_clicked)
+                # self.btn.released.connect(self.btn_released)
+
+                self.load_pages.row_2_layout.addWidget(self.btn)
+
+    """
+    
     def setup_ui(self, parent):
         if not parent.objectName():
             parent.setObjectName("MainWindow")
