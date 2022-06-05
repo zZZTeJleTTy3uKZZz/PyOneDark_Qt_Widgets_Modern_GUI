@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>218</width>
-    <height>834</height>
+    <height>878</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,11 +52,17 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QLabel" name="label_1">
+        <widget class="QLabel" name="name_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>167777</height>
+           <height>30</height>
           </size>
          </property>
          <property name="font">
@@ -229,24 +235,61 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="photo" native="true">
+        <widget class="QLabel" name="photo_pix">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>50</height>
+           <height>150</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>50</height>
+           <height>150</height>
           </size>
          </property>
-         <layout class="QHBoxLayout" name="photo__l"/>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-size: 16pt</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="save" native="true">
+        <widget class="QLabel" name="div">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>167777</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-size: 16pt</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="photo_b" native="true">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -259,7 +302,24 @@
            <height>50</height>
           </size>
          </property>
-         <layout class="QHBoxLayout" name="save__l"/>
+         <layout class="QHBoxLayout" name="photo_b__l"/>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="save_b" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="save_b__l"/>
         </widget>
        </item>
       </layout>

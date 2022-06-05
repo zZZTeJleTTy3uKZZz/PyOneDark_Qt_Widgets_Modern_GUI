@@ -76,6 +76,38 @@ class MainWindow(QMainWindow):
     # Run function when btn is clicked
     # Check funtion by object name / btn_id
     # ///////////////////////////////////////////////////////////////
+    
+
+    # ////////////////////////////////////////////////////////////////
+    #                              Команда
+    # ////////////////////////////////////////////////////////////////
+    def add_team(self):
+        self.ui.left_menu.show()
+        left_menu_margin = self.settings["left_menu_content_margins"]
+        left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
+        self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
+        
+        # Toogle Active
+        if not MainFunctions.right_column_is_visible(self):
+
+            self.ui.add_btn.set_active(False)
+            # Show / Hide
+            MainFunctions.toggle_right_column(self)
+        else:
+
+            self.ui.add_btn.set_active(True)
+
+            # Show / Hide
+            MainFunctions.toggle_right_column(self)
+
+        # Get Left Menu Btn
+        top_settings = MainFunctions.get_left_menu_btn(
+            self, "btn_settings")
+        top_settings.set_active_tab(False)
+        pass
+    
+    
+    
     def btn_clicked(self):
         # GET BT CLICKED
         btn = SetupMainWindow.setup_btns(self)
@@ -85,8 +117,8 @@ class MainWindow(QMainWindow):
             self.ui.left_menu.deselect_all_tab()
 
         # Get Title Bar Btn And Reset Active
-        top_settings = MainFunctions.get_title_bar_btn(self, "btn_top_settings")
-        top_settings.set_active(False)
+        # top_settings = MainFunctions.get_title_bar_btn(self, "btn_top_settings")
+        # top_settings.set_active(False)
 
         
 
@@ -100,6 +132,10 @@ class MainWindow(QMainWindow):
 
             # Load Page 1
             MainFunctions.set_page(self, self.ui.load_pages.page_1)
+            if not MainFunctions.right_column_is_visible(self):
+                MainFunctions.toggle_right_column(self)
+                self.ui.edit_btn.set_active(False)
+                self.ui.add_btn.set_active(False)
 
         # WIDGETS BTN
         if btn.objectName() == "btn_team":
@@ -211,6 +247,7 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)
 
         if btn.objectName() == "btn_search":
+            btn.hide()
             # Скрытие и раскрытие левого меню
             # profile = MainFunctions.get_title_bar_btn(self, "btn_profile")
             # profile.hide()

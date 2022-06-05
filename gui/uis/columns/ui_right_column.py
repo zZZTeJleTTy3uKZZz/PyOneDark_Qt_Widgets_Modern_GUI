@@ -22,7 +22,7 @@ class Ui_RightColumn(object):
     def setupUi(self, RightColumn):
         if not RightColumn.objectName():
             RightColumn.setObjectName(u"RightColumn")
-        RightColumn.resize(218, 834)
+        RightColumn.resize(218, 878)
         self.main_pages_layout = QVBoxLayout(RightColumn)
         self.main_pages_layout.setSpacing(0)
         self.main_pages_layout.setObjectName(u"main_pages_layout")
@@ -35,16 +35,17 @@ class Ui_RightColumn(object):
         self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(5, 5, 5, 5)
-        self.label_1 = QLabel(self.users_menu)
-        self.label_1.setObjectName(u"label_1")
-        self.label_1.setMaximumSize(QSize(16777215, 167777))
+        self.name_2 = QLabel(self.users_menu)
+        self.name_2.setObjectName(u"name_2")
+        self.name_2.setMinimumSize(QSize(0, 30))
+        self.name_2.setMaximumSize(QSize(16777215, 30))
         font = QFont()
         font.setPointSize(16)
-        self.label_1.setFont(font)
-        self.label_1.setStyleSheet(u"font-size: 16pt")
-        self.label_1.setAlignment(Qt.AlignCenter)
+        self.name_2.setFont(font)
+        self.name_2.setStyleSheet(u"font-size: 16pt")
+        self.name_2.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.label_1)
+        self.verticalLayout.addWidget(self.name_2)
 
         self.l_name = QWidget(self.users_menu)
         self.l_name.setObjectName(u"l_name")
@@ -127,23 +128,42 @@ class Ui_RightColumn(object):
 
         self.verticalLayout.addWidget(self.responsible)
 
-        self.photo = QWidget(self.users_menu)
-        self.photo.setObjectName(u"photo")
-        self.photo.setMinimumSize(QSize(0, 50))
-        self.photo.setMaximumSize(QSize(16777215, 50))
-        self.photo__l = QHBoxLayout(self.photo)
-        self.photo__l.setObjectName(u"photo__l")
+        self.photo_pix = QLabel(self.users_menu)
+        self.photo_pix.setObjectName(u"photo_pix")
+        self.photo_pix.setMinimumSize(QSize(0, 150))
+        self.photo_pix.setMaximumSize(QSize(16777215, 150))
+        self.photo_pix.setFont(font)
+        self.photo_pix.setStyleSheet(u"font-size: 16pt")
+        self.photo_pix.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.photo)
+        self.verticalLayout.addWidget(self.photo_pix)
 
-        self.save = QWidget(self.users_menu)
-        self.save.setObjectName(u"save")
-        self.save.setMinimumSize(QSize(0, 50))
-        self.save.setMaximumSize(QSize(16777215, 50))
-        self.save__l = QHBoxLayout(self.save)
-        self.save__l.setObjectName(u"save__l")
+        self.div = QLabel(self.users_menu)
+        self.div.setObjectName(u"div")
+        self.div.setMaximumSize(QSize(16777215, 167777))
+        self.div.setFont(font)
+        self.div.setStyleSheet(u"font-size: 16pt")
+        self.div.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.save)
+        self.verticalLayout.addWidget(self.div)
+
+        self.photo_b = QWidget(self.users_menu)
+        self.photo_b.setObjectName(u"photo_b")
+        self.photo_b.setMinimumSize(QSize(0, 50))
+        self.photo_b.setMaximumSize(QSize(16777215, 50))
+        self.photo_b__l = QHBoxLayout(self.photo_b)
+        self.photo_b__l.setObjectName(u"photo_b__l")
+
+        self.verticalLayout.addWidget(self.photo_b)
+
+        self.save_b = QWidget(self.users_menu)
+        self.save_b.setObjectName(u"save_b")
+        self.save_b.setMinimumSize(QSize(0, 50))
+        self.save_b.setMaximumSize(QSize(16777215, 50))
+        self.save_b__l = QHBoxLayout(self.save_b)
+        self.save_b__l.setObjectName(u"save_b__l")
+
+        self.verticalLayout.addWidget(self.save_b)
 
         self.menus.addWidget(self.users_menu)
         self.menu_2 = QWidget()
@@ -175,7 +195,9 @@ class Ui_RightColumn(object):
 
     def retranslateUi(self, RightColumn):
         RightColumn.setWindowTitle(QCoreApplication.translate("RightColumn", u"Form", None))
-        self.label_1.setText(QCoreApplication.translate("RightColumn", u"\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c", None))
+        self.name_2.setText(QCoreApplication.translate("RightColumn", u"\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c", None))
+        self.photo_pix.setText("")
+        self.div.setText("")
         self.label_2.setText(QCoreApplication.translate("RightColumn", u"Menu 2 - Right Menu", None))
     # retranslateUi
 

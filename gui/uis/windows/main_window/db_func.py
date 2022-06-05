@@ -1,5 +1,11 @@
+from urllib.parse import uses_relative
 from models import *
 from qt_core import *
+import os, sys
+
+class ReadOnlyDelegate(QStyledItemDelegate):
+    def createEditor(self, parent, option, index):
+        return
 
 def errors_sel():
     msg = QMessageBox()
@@ -16,15 +22,43 @@ def loadcollum(row, t, *func):
     
 def colum_header(table, list_header):
     table.setColumnCount(len(list_header))
+    for i in range(len(list_header)):
+        delegate = ReadOnlyDelegate(table)
+        table.setItemDelegateForColumn(i, delegate)
     table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
     table.setSelectionMode(QAbstractItemView.ExtendedSelection)
-    table.setSelectionBehavior(QAbstractItemView.SelectRows)
+    # table.ItemIsEditable(False)
+    
+    # table.setSelectionBehavior(QAbstractItemView.SelectRows)
     table.setHorizontalHeaderLabels(list_header)
     table.setColumnHidden(len(list_header)-1, True)
 
     if list_header[0] == "Фото":
          table.setColumnHidden(len(list_header)-2, True)
    
+
+def show_image(id_user=None, width=300):
+    if id_user != None:
+        ph = User.select().where(User.id == id_user)
+        for p in ph:
+            img = p.photo
+            ext = p.photo_path[p.photo_path.rfind('.'):len(p.photo_path)]
+
+    pixmap = QPixmap()
+
+    pixmap.loadFromData(img, ext)
+    pixmap_resize = pixmap.scaled(130, width, Qt.KeepAspectRatio)
+    return pixmap_resize
+
+
+def getImageLable(image, idp):
+    il = QLabel()
+    il.setText("")
+    try:
+        il.setPixmap(show_image(idp))
+    except:
+        il.setText("Нет фото")
+    return il
 
         
 
@@ -40,9 +74,22 @@ def load_rows(table, target, target_name):
             for r in res:
                 users = [str(val.photo), val.l_name, val.name, val.role.name, val.login, val.passwd, str(val.age), val.address, val.telephone, str(f"{r.l_name} {r.name}"), str(val.photo_path), str(val.id)]
             for u in range(len(users)):
-                table.setItem(row, u, QTableWidgetItem(users[u]))
-                table.setRowHeight(row, 150)
+                if u == 0:
+                    item = getImageLable(users[u], users[len(users)-1])
+                    table.setCellWidget(row, u, item)
+                else:
+                    table.setItem(row, u, QTableWidgetItem(users[u]))
+                    table.setRowHeight(row, 150)
             row += 1
+
+    if target_name == 'Role':
+        row = 0
+        for val in value:
+            roles = [val.name, val.id]
+        for u in range(len(roles)):
+            table.setItem(row, u, QTableWidgetItem(roles[u]))
+            table.setRowHeight(row, 30)
+        row += 1
             
 
 
