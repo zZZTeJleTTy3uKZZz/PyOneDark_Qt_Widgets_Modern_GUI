@@ -81,37 +81,12 @@ class MainWindow(QMainWindow):
     # ////////////////////////////////////////////////////////////////
     #                              Команда
     # ////////////////////////////////////////////////////////////////
-    def add_team(self):
-        self.ui.left_menu.show()
-        left_menu_margin = self.settings["left_menu_content_margins"]
-        left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
-        self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
-        
-        # Toogle Active
-        if not MainFunctions.right_column_is_visible(self):
 
-            self.ui.add_btn.set_active(False)
-            # Show / Hide
-            MainFunctions.toggle_right_column(self)
-        else:
-
-            self.ui.add_btn.set_active(True)
-
-            # Show / Hide
-            MainFunctions.toggle_right_column(self)
-
-        # Get Left Menu Btn
-        top_settings = MainFunctions.get_left_menu_btn(
-            self, "btn_settings")
-        top_settings.set_active_tab(False)
-        pass
-    
-    
     
     def btn_clicked(self):
         # GET BT CLICKED
         btn = SetupMainWindow.setup_btns(self)
-
+        
         # Remove Selection If Clicked By "btn_close_left_column"
         if btn.objectName() != "btn_settings":
             self.ui.left_menu.deselect_all_tab()
@@ -132,11 +107,12 @@ class MainWindow(QMainWindow):
 
             # Load Page 1
             MainFunctions.set_page(self, self.ui.load_pages.p_hub)
+            SetupMainWindow.adaptive(self)
             if MainFunctions.right_column_is_visible(self):
                 MainFunctions.toggle_right_column(self)
                 self.ui.edit_btn.set_active(False)
                 self.ui.add_btn.set_active(False)
-            print(MainFunctions.get_page(self))
+            # print(MainFunctions.get_page(self))
 
 
         # Команда
@@ -146,11 +122,12 @@ class MainWindow(QMainWindow):
 
             # Load Page 2
             MainFunctions.set_page(self, self.ui.load_pages.p_team)
+            SetupMainWindow.adaptive(self)
             if MainFunctions.right_column_is_visible(self):
                 MainFunctions.toggle_right_column(self)
                 self.ui.edit_btn.set_active(False)
                 self.ui.add_btn.set_active(False)
-            print(MainFunctions.get_page(self))
+            # print(MainFunctions.get_page(self))
 
         # Команда
         if btn.objectName() == "btn_storonnik":
@@ -159,11 +136,12 @@ class MainWindow(QMainWindow):
 
             # Load Page 2
             MainFunctions.set_page(self, self.ui.load_pages.p_storonnik)
+            SetupMainWindow.adaptive(self)
             if MainFunctions.right_column_is_visible(self):
                 MainFunctions.toggle_right_column(self)
                 self.ui.edit_btn.set_active(False)
                 self.ui.add_btn.set_active(False)
-            print(MainFunctions.get_page(self))
+            # print(MainFunctions.get_page(self))
 
         # Команда
         if btn.objectName() == "btn_event":
@@ -172,11 +150,12 @@ class MainWindow(QMainWindow):
 
             # Load Page 2
             MainFunctions.set_page(self, self.ui.load_pages.p_event)
+            SetupMainWindow.adaptive(self)
             if MainFunctions.right_column_is_visible(self):
                 MainFunctions.toggle_right_column(self)
                 self.ui.edit_btn.set_active(False)
                 self.ui.add_btn.set_active(False)
-            print(MainFunctions.get_page(self))
+            # print(MainFunctions.get_page(self))
 
         # Команда
         if btn.objectName() == "btn_kpi":
@@ -185,11 +164,12 @@ class MainWindow(QMainWindow):
 
             # Load Page 2
             MainFunctions.set_page(self, self.ui.load_pages.p_kpi)
+            SetupMainWindow.adaptive(self)
             if MainFunctions.right_column_is_visible(self):
                 MainFunctions.toggle_right_column(self)
                 self.ui.edit_btn.set_active(False)
                 self.ui.add_btn.set_active(False)
-            print(MainFunctions.get_page(self))
+            # print(MainFunctions.get_page(self))
 
         # Команда
         if btn.objectName() == "btn_quote":
@@ -198,11 +178,12 @@ class MainWindow(QMainWindow):
 
             # Load Page 2
             MainFunctions.set_page(self, self.ui.load_pages.p_quote)
+            SetupMainWindow.adaptive(self)
             if MainFunctions.right_column_is_visible(self):
                 MainFunctions.toggle_right_column(self)
                 self.ui.edit_btn.set_active(False)
                 self.ui.add_btn.set_active(False)
-            print(MainFunctions.get_page(self))
+            # print(MainFunctions.get_page(self))
 
 
 
@@ -349,7 +330,7 @@ class MainWindow(QMainWindow):
             top_settings.set_active_tab(False)
 
 
-        print(f"Button {btn.objectName()}, clicked!")
+        # print(f"Button {btn.objectName()}, clicked!")
 
     # LEFT MENU BTN IS RELEASED
     # Run function when btn is released
@@ -360,7 +341,7 @@ class MainWindow(QMainWindow):
         btn = SetupMainWindow.setup_btns(self)
 
         # DEBUG
-        print(f"Button {btn.objectName()}, released!")
+        # print(f"Button {btn.objectName()}, released!")
 
     # RESIZE EVENT
     # ///////////////////////////////////////////////////////////////

@@ -1,6 +1,6 @@
 from peewee import *
 
-db = SqliteDatabase('nl_2.db')
+db = SqliteDatabase('nl_3.db')
 
 
 class BaseModel(Model):
@@ -36,10 +36,10 @@ class User(BaseModel):
 
 
 class Loyality(BaseModel):
-   name = CharField()
+    name = CharField()
 
-   class Meta():
-      db_table = 'loyalitys'
+    class Meta():
+        db_table = 'loyalitys'
 
 
 class Storonnik(BaseModel):
@@ -50,7 +50,7 @@ class Storonnik(BaseModel):
     telephone = CharField(12)
     social_media = CharField(null=True)
     responsible = ForeignKeyField(User)
-    loyalty = ForeignKeyField(Loyality)
+    loyality = ForeignKeyField(Loyality)
     desc = CharField(null=True)
 
     class Meta:
@@ -95,6 +95,7 @@ class Kpi(BaseModel):
 
     class Meta:
         db_table = 'kpis'
+
 
 class Quote(BaseModel):
     text = TextField()

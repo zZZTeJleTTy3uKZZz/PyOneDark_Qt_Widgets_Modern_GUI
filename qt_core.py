@@ -33,9 +33,9 @@ from gui.core.json_themes import Themes
 
 from gui.widgets import *   
 
-from gui.uis.windows.main_window.functions_main_window import *
+from gui.uis.windows.main_window import *
 
-from gui.uis.windows.main_window.db_func import *
+
 
 import pandas as pd
 import openpyxl

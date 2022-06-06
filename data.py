@@ -43,8 +43,30 @@ def create_loyality():
     Loyality.insert_many(loyality).execute()
 
 
+def create_storonnik():
+    usersid = User.select()
+    loyalityid = Loyality.select()
+    storonniks = [
+        {'responsible_id':usersid[3], 'loyality_id':loyalityid[0], 'l_name':'Сидоров', 'name':'Инокентий', 'age':25, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/lolel182'},
+        {'responsible_id':usersid[5], 'loyality_id':loyalityid[3], 'l_name':'Катинов', 'name':'Павел', 'age':22, 'address':'ул. Спартака, д.229', 'telephone':'+79716306488', 'social_media':'vk.com/lolel182'},
+        {'responsible_id':usersid[6], 'loyality_id':loyalityid[2], 'l_name':'Кузинков', 'name':'Никита', 'age':26, 'address':'ул. Мира, д.18', 'telephone':'+79716306488', 'social_media':'vk.com/lolel182'},
+        {'responsible_id':usersid[7], 'loyality_id':loyalityid[2], 'l_name':'Волубев', 'name':'Георгий', 'age':28, 'address':'ул. Тухачевского, д.46', 'telephone':'+79716306488', 'social_media':'vk.com/lxj1jds93'},
+        {'responsible_id':usersid[7], 'loyality_id':loyalityid[4], 'l_name':'Руснак', 'name':'Степан', 'age':20, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/somcu18c'},
+        {'responsible_id':usersid[3], 'loyality_id':loyalityid[3], 'l_name':'Хромов', 'name':'Даниил', 'age':21, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/lolel182'},
+        {'responsible_id':usersid[3], 'loyality_id':loyalityid[1], 'l_name':'Пермякова', 'name':'Светлана', 'age':19, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/lolel182'},
+        {'responsible_id':usersid[4], 'loyality_id':loyalityid[1], 'l_name':'Гаценко', 'name':'Леонид', 'age':25, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/chi1oc81'},
+        {'responsible_id':usersid[3], 'loyality_id':loyalityid[0], 'l_name':'Мельников', 'name':'Максим', 'age':24, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/s1px18xh'},
+        {'responsible_id':usersid[6], 'loyality_id':loyalityid[1], 'l_name':'Турышева', 'name':'Анастасия', 'age':29, 'address':'ул. Мимоз, д.4', 'telephone':'+79761306488', 'social_media':'vk.com/lolel182'},
+        {'responsible_id':usersid[3], 'loyality_id':loyalityid[4], 'l_name':'Кудряшова', 'name':'Инесса', 'age':42, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/vsod83f'},
+        {'responsible_id':usersid[6], 'loyality_id':loyalityid[4], 'l_name':'Лапина', 'name':'Алла', 'age':23, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/15lolel182'},
+        {'responsible_id':usersid[3], 'loyality_id':loyalityid[2], 'l_name':'Никишина', 'name':'Инна', 'age':25, 'address':'ул. Мимоз, д.4', 'telephone':'+79719206488', 'social_media':'vk.com/19hct2nx'},
+        {'responsible_id':usersid[8], 'loyality_id':loyalityid[2], 'l_name':'Бочкарёва', 'name':'Вера', 'age':21, 'address':'ул. Мимоз, д.4', 'telephone':'+79716306488', 'social_media':'vk.com/lolel182'},
+    ]
+    Storonnik.insert_many(storonniks).execute()
+
 with db:
     db.create_tables([Role, User, Storonnik, E_type, Event, Action, Kpi, Quote, Loyality])
     create_role()
     create_user()
     create_loyality()
+    create_storonnik()

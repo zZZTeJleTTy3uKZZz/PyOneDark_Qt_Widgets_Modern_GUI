@@ -1,7 +1,7 @@
-from urllib.parse import uses_relative
-from models import *
 from qt_core import *
-import os, sys
+from models import *
+import os
+import sys
 
 class ReadOnlyDelegate(QStyledItemDelegate):
     def createEditor(self, parent, option, index):
@@ -19,8 +19,17 @@ def loadcollum(row, t, *func):
     for i in range(len(func)):
         t.setItem(row, i, QTableWidgetItem(func[i]))
     
+
+def deltable(table):
+    for row in range(table.rowCount()):
+        table.removeRow(0)
+    for col in range(table.columnCount()):
+        table.removeColumn(0)
     
+
+
 def colum_header(table, list_header):
+    
     table.setColumnCount(len(list_header))
     for i in range(len(list_header)):
         delegate = ReadOnlyDelegate(table)
@@ -90,6 +99,18 @@ def load_rows(table, target, target_name):
             table.setItem(row, u, QTableWidgetItem(roles[u]))
             table.setRowHeight(row, 30)
         row += 1
+
+
+    if target_name == 'Storonnik':
+        row = 0
+        for val in value:
+            storonniks = [val.l_name, val.name, str(val.age), val.address, val.telephone, val.social_media, f"{val.responsible.l_name} {val.responsible.name}", 
+            val.loyality.name, str(len(Action.select().where(Action.storonnik_id == val.id))), str(val.id)]
+            for u in range(len(storonniks)):
+                table.setItem(row, u, QTableWidgetItem(storonniks[u]))
+                table.setRowHeight(row, 30)
+            row += 1
+
             
 
 

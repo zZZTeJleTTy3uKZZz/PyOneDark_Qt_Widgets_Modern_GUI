@@ -19,7 +19,7 @@
 
 from gui.widgets.py_table_widget.py_table_widget import PyTableWidget
 from .functions_main_window import *
-from .db_func import *
+from gui.uis.windows.main_window.db_func import *
 import sys
 import os
 
@@ -47,6 +47,8 @@ from .ui_main import *
 # MAIN FUNCTIONS
 # ///////////////////////////////////////////////////////////////
 from .functions_main_window import *
+
+from gui.core import *
 
 
 ch = 0
@@ -260,28 +262,6 @@ class SetupMainWindow:
         self.themes = themes.items
 
         # ////////////////////////////////////////////////////////////////
-        #                              Авторизация
-        # ////////////////////////////////////////////////////////////////
-
-        # ////////////////////////////////////////////////////////////////
-        #                              Главная
-        # ////////////////////////////////////////////////////////////////
-
-        # Добавление лого
-        self.logo_svg = QSvgWidget(Functions.set_svg_image("logo_home.svg"))
-        self.ui.load_pages.logo_layout.addWidget(
-            self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
-
-        self.bt = QPushButton("Нажми на меня")
-
-        def pr():
-            print(self.ui.credits.copyright_label.text())
-
-        self.bt.clicked.connect(lambda: pr())
-
-        self.ui.load_pages.logo_layout.addWidget(self.bt)
-
-        # ////////////////////////////////////////////////////////////////
         #                 Общее построение страницы с БД
         # ////////////////////////////////////////////////////////////////
 
@@ -411,20 +391,24 @@ class SetupMainWindow:
         self.ui.find_l.setMinimumHeight(40)
 
         # Добавление объектов на главный пэйдж
-        self.ui.load_pages.row_1_layout.addWidget(self.ui.table)
-        self.ui.load_pages.row_2_layout.addWidget(self.ui.add_btn)
-        self.ui.load_pages.row_2_layout.addWidget(self.ui.edit_btn)
-        self.ui.load_pages.row_2_layout.addWidget(self.ui.delete_btn)
-        self.ui.load_pages.row_2_layout.addWidget(self.ui.export_btn)
-        self.ui.load_pages.row_2_layout.addWidget(self.ui.find_l)
-        self.ui.load_pages.row_2_layout.addWidget(self.ui.search_btn)
 
-        # Заполнение таблицы
-        if MainFunctions.get_page(self) == 1:
-            self.users = ("Фото", "Фамилия", "Имя", "Роль", "Логин", "Пароль",
-                          "Возраст", "Адрес", "Телефон", "Ответственный", "photo_path", "id_user")
-            colum_header(self.ui.table, self.users)
-            load_rows(self.ui.table, User(), 'User')
+        # ////////////////////////////////////////////////////////////////
+        #                              Авторизация
+        # ////////////////////////////////////////////////////////////////
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Главная
+        # ////////////////////////////////////////////////////////////////
+
+        # Добавление лого
+        self.logo_svg = QSvgWidget(Functions.set_svg_image("logo_home.svg"))
+        self.ui.load_pages.logo_layout.addWidget(
+            self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Команда
+        # ////////////////////////////////////////////////////////////////
+        
 
         # ------------------------------------------
         #               Правое меню
@@ -625,68 +609,6 @@ class SetupMainWindow:
         self.ui.right_column.photo_b__l.addWidget(self.ui.b_photo)
 
         # ////////////////////////////////////////////////////////////////
-        #                 Общее построение правого меню
-        # ////////////////////////////////////////////////////////////////
-
-        self.ui.b_save = PyPushButton(
-            text="Сохранить",
-            radius=8,
-            color=self.themes["app_color"]["text_foreground"],
-            bg_color=self.themes["app_color"]["dark_one"],
-            bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
-        )
-        # self.icon = QIcon(Functions.set_svg_icon("icon_file.svg"))
-        # self.ui.b_photo.setIcon(self.icon)
-        self.ui.b_save.setMaximumHeight(40)
-
-        self.ui.b_cancel = PyPushButton(
-            text="Отмена",
-            radius=8,
-            color=self.themes["app_color"]["text_foreground"],
-            bg_color=self.themes["app_color"]["dark_one"],
-            bg_color_hover=self.themes["app_color"]["dark_three"],
-            bg_color_pressed=self.themes["app_color"]["dark_four"]
-        )
-        # self.icon = QIcon(Functions.set_svg_icon("icon_file.svg"))
-        # self.ui.b_photo.setIcon(self.icon)
-        self.ui.b_cancel.setMaximumHeight(40)
-
-        self.ui.right_column.save_b__l.addWidget(self.ui.b_save)
-        self.ui.right_column.save_b__l.addWidget(self.ui.b_cancel)
-
-        # Сигналы
-
-        # Функции
-
-        def show_image(id_user=None, width=9999):
-            if id_user != None:
-                ph = User.select().where(User.id == id_user)
-                for p in ph:
-                    img = p.photo
-                    ext = p.photo_path[p.photo_path.rfind(
-                        '.'):len(p.photo_path)]
-            else:
-                img = self.ui.photo
-                ext = self.ui.ospath
-            self.pixmap = QPixmap()
-
-            self.pixmap.loadFromData(img, ext)
-            self.pixmap_resize = self.pixmap.scaled(
-                130, width, Qt.KeepAspectRatio)
-            return self.pixmap_resize
-
-        def get_photo():
-            fname = QFileDialog.getOpenFileName(self,
-                                                'Choose picture',
-                                                './')
-
-            self.ui.ospath = fname[0]
-            with open(self.ui.ospath, 'rb') as ph:
-                self.ui.photo = ph.read()
-            self.ui.right_column.photo_pix.setPixmap(show_image())
-
-        # ////////////////////////////////////////////////////////////////
         #                              Сторонники
         # ////////////////////////////////////////////////////////////////
 
@@ -702,19 +624,53 @@ class SetupMainWindow:
         #                              Цитаты
         # ////////////////////////////////////////////////////////////////
 
+        # ////////////////////////////////////////////////////////////////
+        #                 Общее построение правого меню
+        # ////////////////////////////////////////////////////////////////
+
+        self.ui.b_save = PyPushButton(
+            text="Сохранить",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.ui.b_save.setMaximumHeight(40)
+
+        self.ui.b_cancel = PyPushButton(
+            text="Отмена",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.ui.b_cancel.setMaximumHeight(40)
+
+        self.ui.right_column.save_b__l.addWidget(self.ui.b_save)
+        self.ui.right_column.save_b__l.addWidget(self.ui.b_cancel)
+
         # ///////////////////////////////////////////////////////////////
-        #                           Общие функции
+        #                           функции
         # ///////////////////////////////////////////////////////////////
+
+        # Общие
+
+        # Выход из правого меню
 
         def cancel():
             self.ui.add_btn.set_active(False)
             self.ui.edit_btn.set_active(False)
             MainFunctions.toggle_right_column(self)
 
+        # Экспорт в Excel
+
         def export():
             if MainFunctions.get_page(self) == 1:
                 exportxl(self.ui.table, "Команда")
 
+        # Добавление записи
         def add():
             if not MainFunctions.right_column_is_visible(self):
                 global id_sel
@@ -733,13 +689,15 @@ class SetupMainWindow:
                     self.ui.c_responsible.setCurrentIndex(-1)
                     MainFunctions.toggle_right_column(self)
 
+        # Редактирование записи
+
         def edit():
 
             try:
                 global id_sel
                 for i in self.ui.table.selectedItems():
                     id_sel = self.ui.table.item(
-                        i.row(), len(self.users)-1).text()
+                        i.row(), len(self.ui.users)-1).text()
                     if not MainFunctions.right_column_is_visible(self):
                         self.ui.edit_btn.set_active(True)
                         self.ui.add_btn.set_active(False)
@@ -772,6 +730,8 @@ class SetupMainWindow:
 
             except:
                 errors_sel()
+
+        # Сохранение правое меню
 
         def save():
             global id_sel
@@ -817,12 +777,13 @@ class SetupMainWindow:
 
                 load_rows(self.ui.table, User(), 'User')
 
+        # Удаение записи
         def delete():
             try:
                 global id_sel
                 for i in self.ui.table.selectedItems():
                     id_sel = self.ui.table.item(
-                        i.row(), len(self.users)-1).text()
+                        i.row(), len(self.ui.data)-1).text()
                     if not MainFunctions.right_column_is_visible(self):
                         self.ui.edit_btn.set_active(False)
                         self.ui.add_btn.set_active(False)
@@ -880,6 +841,35 @@ class SetupMainWindow:
 
             df.to_excel(f'{date} отчёт {name}.xlsx', index=False)
 
+        # Команда
+
+        def show_image(id_user=None, width=9999):
+            if id_user != None:
+                ph = User.select().where(User.id == id_user)
+                for p in ph:
+                    img = p.photo
+                    ext = p.photo_path[p.photo_path.rfind(
+                        '.'):len(p.photo_path)]
+            else:
+                img = self.ui.photo
+                ext = self.ui.ospath
+            self.pixmap = QPixmap()
+
+            self.pixmap.loadFromData(img, ext)
+            self.pixmap_resize = self.pixmap.scaled(
+                130, width, Qt.KeepAspectRatio)
+            return self.pixmap_resize
+
+        def get_photo():
+            fname = QFileDialog.getOpenFileName(self,
+                                                'Choose picture',
+                                                './')
+
+            self.ui.ospath = fname[0]
+            with open(self.ui.ospath, 'rb') as ph:
+                self.ui.photo = ph.read()
+            self.ui.right_column.photo_pix.setPixmap(show_image())
+
         # ///////////////////////////////////////////////////////////////
         #                           Сигналы
         # ///////////////////////////////////////////////////////////////
@@ -901,6 +891,135 @@ class SetupMainWindow:
 
         # Команда
         self.ui.b_photo.clicked.connect(lambda: get_photo())
+
+        
+
+
+
+    def adaptive(self):
+        if MainFunctions.get_page(self) == 1:
+            self.ui.load_pages.row_1_layout.addWidget(self.ui.table)
+            self.ui.load_pages.row_2_layout.addWidget(self.ui.add_btn)
+            self.ui.load_pages.row_2_layout.addWidget(self.ui.edit_btn)
+            self.ui.load_pages.row_2_layout.addWidget(self.ui.delete_btn)
+            self.ui.load_pages.row_2_layout.addWidget(self.ui.export_btn)
+            self.ui.load_pages.row_2_layout.addWidget(self.ui.find_l)
+            self.ui.load_pages.row_2_layout.addWidget(self.ui.search_btn)
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Сторонники
+        # ////////////////////////////////////////////////////////////////
+        if MainFunctions.get_page(self) == 2:
+            self.ui.load_pages.row_1_layout_2.addWidget(self.ui.table)
+            self.ui.load_pages.row_2_layout_2.addWidget(self.ui.add_btn)
+            self.ui.load_pages.row_2_layout_2.addWidget(self.ui.edit_btn)
+            self.ui.load_pages.row_2_layout_2.addWidget(self.ui.delete_btn)
+            self.ui.load_pages.row_2_layout_2.addWidget(self.ui.export_btn)
+            self.ui.load_pages.row_2_layout_2.addWidget(self.ui.find_l)
+            self.ui.load_pages.row_2_layout_2.addWidget(self.ui.search_btn)
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Мероприятия
+        # ////////////////////////////////////////////////////////////////
+        if MainFunctions.get_page(self) == 3:
+            self.ui.load_pages.row_1_layout_3.addWidget(self.ui.table)
+            self.ui.load_pages.row_2_layout_3.addWidget(self.ui.add_btn)
+            self.ui.load_pages.row_2_layout_3.addWidget(self.ui.edit_btn)
+            self.ui.load_pages.row_2_layout_3.addWidget(self.ui.delete_btn)
+            self.ui.load_pages.row_2_layout_3.addWidget(self.ui.export_btn)
+            self.ui.load_pages.row_2_layout_3.addWidget(self.ui.find_l)
+            self.ui.load_pages.row_2_layout_3.addWidget(self.ui.search_btn)
+
+        # ////////////////////////////////////////////////////////////////
+        #                              KPI
+        # ////////////////////////////////////////////////////////////////
+        if MainFunctions.get_page(self) == 4:
+            self.ui.load_pages.row_1_layout_4.addWidget(self.ui.table)
+            self.ui.load_pages.row_2_layout_4.addWidget(self.ui.add_btn)
+            self.ui.load_pages.row_2_layout_4.addWidget(self.ui.edit_btn)
+            self.ui.load_pages.row_2_layout_4.addWidget(self.ui.delete_btn)
+            self.ui.load_pages.row_2_layout_4.addWidget(self.ui.export_btn)
+            self.ui.load_pages.row_2_layout_4.addWidget(self.ui.find_l)
+            self.ui.load_pages.row_2_layout_4.addWidget(self.ui.search_btn)
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Цитаты
+        # ////////////////////////////////////////////////////////////////
+        if MainFunctions.get_page(self) == 5:
+            self.ui.load_pages.row_1_layout_5.addWidget(self.ui.table)
+            self.ui.load_pages.row_2_layout_5.addWidget(self.ui.add_btn)
+            self.ui.load_pages.row_2_layout_5.addWidget(self.ui.edit_btn)
+            self.ui.load_pages.row_2_layout_5.addWidget(self.ui.delete_btn)
+            self.ui.load_pages.row_2_layout_5.addWidget(self.ui.export_btn)
+            self.ui.load_pages.row_2_layout_5.addWidget(self.ui.find_l)
+            self.ui.load_pages.row_2_layout_5.addWidget(self.ui.search_btn)
+
+
+        
+
+        # ///////////////////////////////////////////////////////////////
+        #                           Данные
+        # ///////////////////////////////////////////////////////////////
+
+        # Заполнение таблицы
+
+        # Команда
+        if MainFunctions.get_page(self) == 1:
+            self.ui.users = ("Фото", "Фамилия", "Имя", "Роль", "Логин", "Пароль",
+                             "Возраст", "Адрес", "Телефон", "Ответственный", "photo_path", "id_user")
+            deltable(self.ui.table)
+            colum_header(self.ui.table, self.ui.users)
+            load_rows(self.ui.table, User(), 'User')
+            self.ui.data = self.ui.users
+        
+        
+        # Сторонники
+        if MainFunctions.get_page(self) == 2:
+            self.ui.storoniks = ("Фамилия", "Имя",
+                             "Возраст", "Адрес", "Телефон", "Социальные сети", "Ответственный", "Лояльность", "Кол-во мероприятий", "id_storonik")
+            deltable(self.ui.table)
+            colum_header(self.ui.table, self.ui.storoniks)
+            load_rows(self.ui.table, Storonnik(), 'Storonnik')
+            self.ui.data = self.ui.storoniks
+
+
+        # Мероприятия
+        if MainFunctions.get_page(self) == 3:
+            self.ui.evens = ("Тип мероприятия", "Название", "Бюджет", "Ответственный", "Описание", "id_event")
+            deltable(self.ui.table)
+            colum_header(self.ui.table, self.ui.evens)
+            load_rows(self.ui.table, Event(), 'Event')
+            self.ui.data = self.ui.evens
+
+
+        # KPI
+        if MainFunctions.get_page(self) == 4:
+            self.ui.kpis = ("Название", "Кол-во", "Дедлайн", "Цель", "Описание", "id_kpi")
+            deltable(self.ui.table)
+            colum_header(self.ui.table, self.ui.kpis)
+            load_rows(self.ui.table, Kpi(), 'Kpi')
+            self.ui.data = self.ui.kpis
+
+
+        # Цитаты
+        if MainFunctions.get_page(self) == 5:
+            self.ui.quotes = ("Текст", "id_quote")
+            deltable(self.ui.table)
+            colum_header(self.ui.table, self.ui.quotes)
+            load_rows(self.ui.table, Quote(), 'Quote')
+            self.ui.data = self.ui.quotes
+        
+        
+        
+        print(MainFunctions.get_page(self))
+        pass
+
+
+
+
+
+
+
 
     # RESIZE GRIPS AND CHANGE POSITION
     # Resize or change position when window is resized
