@@ -16,7 +16,7 @@
 
 # IMPORT PACKAGES AND MODULES
 # ///////////////////////////////////////////////////////////////
-from gui.widgets.py_combo_box.py_combo_box import PyComboBox
+
 from gui.widgets.py_table_widget.py_table_widget import PyTableWidget
 from .functions_main_window import *
 from .db_func import *
@@ -71,7 +71,7 @@ class SetupMainWindow:
         {
             "btn_icon": "icon_home.svg",
             "btn_id": "btn_home",
-            "btn_text": "только не на лицо",
+            "btn_text": "Перейти на главную",
             "btn_tooltip": "Главная страница",
             "show_top": True,
             "is_active": True
@@ -81,6 +81,38 @@ class SetupMainWindow:
             "btn_id": "btn_team",
             "btn_text": "Перейти к команде",
             "btn_tooltip": "Команда",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "_icon_team.svg",
+            "btn_id": "btn_storonnik",
+            "btn_text": "Перейти к Сторонникам",
+            "btn_tooltip": "Сторонники",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "_icon_team.svg",
+            "btn_id": "btn_event",
+            "btn_text": "Перейти к меропритиям",
+            "btn_tooltip": "Мероприятия",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "_icon_team.svg",
+            "btn_id": "btn_kpi",
+            "btn_text": "Перейти к KPI",
+            "btn_tooltip": "KPI",
+            "show_top": True,
+            "is_active": False
+        },
+        {
+            "btn_icon": "_icon_team.svg",
+            "btn_id": "btn_quote",
+            "btn_text": "Добавить цитату",
+            "btn_tooltip": "Цитаты",
             "show_top": True,
             "is_active": False
         },
@@ -189,7 +221,7 @@ class SetupMainWindow:
 
         # SET INITIAL PAGE / SET LEFT AND RIGHT COLUMN MENUS
         # ///////////////////////////////////////////////////////////////
-        MainFunctions.set_page(self, self.ui.load_pages.p_team)
+        MainFunctions.set_page(self, self.ui.load_pages.p_auth)
         MainFunctions.set_left_column_menu(
             self,
             menu=self.ui.left_column.menus.menu_1,
@@ -250,38 +282,8 @@ class SetupMainWindow:
         self.ui.load_pages.logo_layout.addWidget(self.bt)
 
         # ////////////////////////////////////////////////////////////////
-        #                              Команда
+        #                 Общее построение страницы с БД
         # ////////////////////////////////////////////////////////////////
-
-        # Добавление кнопок
-        """
-        Хорошая попытка, но не сегодня(
-
-        add_btn_user = [
-        {
-            "btn_icon" : "_icon_add.svg",
-            "btn_id" : "btn_add_user",
-            "btn_tooltip" : "Создать запись",
-        },
-        {
-            "btn_icon" : "_icon_edit.svg",
-            "btn_id" : "btn_edit_user",
-            "btn_tooltip" : "Редактировать запись",
-        },
-        {
-            "btn_icon" : "_icon_delete.svg",
-            "btn_id" : "btn_del_user",
-            "btn_tooltip" : "Удалить запись",
-        },
-        {
-            "btn_icon" : "_icon_export.svg",
-            "btn_id" : "btn_export_user",
-            "btn_tooltip" : "Экспорт в таблицу",
-        }
-        ]
-
-        self.ui.set_btn(add_btn_user)
-        """
 
         self.ui.add_btn = PyIconButton(
             icon_path=Functions.set_svg_icon("_icon_add.svg"),
@@ -375,7 +377,7 @@ class SetupMainWindow:
 
         # Добавление таблицы
 
-        self.ui.table_user = PyTableWidget(
+        self.ui.table = PyTableWidget(
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             selection_color=self.themes["app_color"]["dark_three"],
@@ -388,12 +390,6 @@ class SetupMainWindow:
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
             context_color=self.themes["app_color"]["context_color"]
         )
-
-        # Заполнение таблицы
-        self.users = ("Фото", "Фамилия", "Имя", "Роль", "Логин", "Пароль",
-                      "Возраст", "Адрес", "Телефон", "Ответственный", "photo_path", "id_user")
-        colum_header(self.ui.table_user, self.users)
-        load_rows(self.ui.table_user, User(), 'User')
 
         # Поиск
 
@@ -415,7 +411,7 @@ class SetupMainWindow:
         self.ui.find_l.setMinimumHeight(40)
 
         # Добавление объектов на главный пэйдж
-        self.ui.load_pages.row_1_layout.addWidget(self.ui.table_user)
+        self.ui.load_pages.row_1_layout.addWidget(self.ui.table)
         self.ui.load_pages.row_2_layout.addWidget(self.ui.add_btn)
         self.ui.load_pages.row_2_layout.addWidget(self.ui.edit_btn)
         self.ui.load_pages.row_2_layout.addWidget(self.ui.delete_btn)
@@ -423,118 +419,20 @@ class SetupMainWindow:
         self.ui.load_pages.row_2_layout.addWidget(self.ui.find_l)
         self.ui.load_pages.row_2_layout.addWidget(self.ui.search_btn)
 
-        # Функции
-
-        #   Открытие меню добавления пользователя
-
-        def add_team_p():
-
-            if not MainFunctions.right_column_is_visible(self):
-                global id_sel
-                id_sel = -1
-                self.ui.add_btn.set_active(True)
-                self.ui.edit_btn.set_active(False)
-                self.ui.l_l_name.setText(None)
-                self.ui.l_name.setText(None)
-                self.ui.c_table_role.setCurrentIndex(-1)
-                self.ui.l_login.setText(None)
-                self.ui.l_passwd.setText(None)
-                self.ui.l_age.setText(None)
-                self.ui.l_address.setText(None)
-                self.ui.l_telephone.setText(None)
-                self.ui.c_responsible.setCurrentIndex(-1)
-                MainFunctions.toggle_right_column(self)
-
-        self.ui.add_btn.clicked.connect(lambda: add_team_p())
-
-        #   Открытие меню редактирования пользователя
-        def edit_team_p():
-
-            try:
-                global id_sel
-                for i in self.ui.table_user.selectedItems():
-                    id_sel = self.ui.table_user.item(
-                        i.row(), len(self.users)-1).text()
-                    if not MainFunctions.right_column_is_visible(self):
-                        self.ui.edit_btn.set_active(True)
-                        self.ui.add_btn.set_active(False)
-                        team = User.select().where(User.id == id_sel)
-                        for t in team:
-                            self.ui.l_l_name.setText(t.l_name)
-                            self.ui.l_name.setText(t.name)
-                            self.ui.c_table_role.setCurrentIndex(t.role_id-1)
-                            self.ui.l_login.setText(t.login)
-                            self.ui.l_passwd.setText(t.passwd)
-                            self.ui.l_age.setText(str(t.age))
-                            self.ui.l_address.setText(t.address)
-                            self.ui.l_telephone.setText(t.telephone)
-                            self.find = int(t.responsible_id)
-                            try:
-                                self.ui.right_column.photo_pix.setPixmap(
-                                    show_image(id_sel))
-                            except:
-                                self.ui.right_column.photo_pix.setText(
-                                    "Нет фото")
-                                pass
-                            if self.find in dict_user.values():
-                                cur_index = list(
-                                    dict_user.values()).index(self.find)
-                            self.ui.c_responsible.setCurrentIndex(cur_index)
-                        MainFunctions.toggle_right_column(self)
-
-            except:
-                errors_sel()
-
-        self.ui.edit_btn.clicked.connect(lambda: edit_team_p())
-
-        def del_team_p():
-            try:
-                global id_sel
-                for i in self.ui.table_user.selectedItems():
-                    id_sel = self.ui.table_user.item(
-                        i.row(), len(self.users)-1).text()
-                    if not MainFunctions.right_column_is_visible(self):
-                        self.ui.edit_btn.set_active(False)
-                        self.ui.add_btn.set_active(False)
-                        team = User.get(User.id == id_sel)
-                        team.delete_instance()
-                        load_rows(self.ui.table_user, User(), 'User')
-
-            except:
-                errors_sel()
-
-        self.ui.delete_btn.clicked.connect(lambda: del_team_p())
-
-        def search_team_p():
-            global ch
-            global select_item
-            if select_item == self.ui.find_l.text():
-                ch += 1
-            else:
-                ch = 0
-                select_item = self.ui.find_l.text()
-            self.ui.table_user.setCurrentItem(None)
-            if not select_item:
-                return
-
-            try:
-                search_item = self.ui.table_user.findItems(
-                    select_item, Qt.MatchContains)
-                if search_item:
-                    try:
-                        item = search_item[ch]
-                        self.ui.table_user.setCurrentItem(item)
-                    except:
-                        ch = -1
-
-            except:
-                errors_sel()
-
-        self.ui.search_btn.clicked.connect(lambda: search_team_p())
+        # Заполнение таблицы
+        if MainFunctions.get_page(self) == 1:
+            self.users = ("Фото", "Фамилия", "Имя", "Роль", "Логин", "Пароль",
+                          "Возраст", "Адрес", "Телефон", "Ответственный", "photo_path", "id_user")
+            colum_header(self.ui.table, self.users)
+            load_rows(self.ui.table, User(), 'User')
 
         # ------------------------------------------
         #               Правое меню
         # ------------------------------------------
+
+        # ////////////////////////////////////////////////////////////////
+        #                              Команда
+        # ////////////////////////////////////////////////////////////////
 
         # Создание инпутов
         self.ui.l_l_name = PyLineEdit(
@@ -701,10 +599,9 @@ class SetupMainWindow:
             dict_user.update({user: us.id})
         for us in dict_user.keys():
             self.ui.c_responsible.addItem(us)
-        print(dict_user)
 
         self.ui.b_photo = PyPushButton(
-            text="Загрузить фото",
+            text="  Загрузить фото",
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
@@ -714,6 +611,22 @@ class SetupMainWindow:
         self.icon = QIcon(Functions.set_svg_icon("icon_file.svg"))
         self.ui.b_photo.setIcon(self.icon)
         self.ui.b_photo.setMaximumHeight(40)
+
+        #  Добавление элементов на правое меню
+        self.ui.right_column.l_name__l.addWidget(self.ui.l_l_name)
+        self.ui.right_column.name__l.addWidget(self.ui.l_name)
+        self.ui.right_column.table_role__l.addWidget(self.ui.c_table_role)
+        self.ui.right_column.login__l.addWidget(self.ui.l_login)
+        self.ui.right_column.passwd__l.addWidget(self.ui.l_passwd)
+        self.ui.right_column.age__l.addWidget(self.ui.l_age)
+        self.ui.right_column.address__l.addWidget(self.ui.l_address)
+        self.ui.right_column.telephone__l.addWidget(self.ui.l_telephone)
+        self.ui.right_column.responsible__l.addWidget(self.ui.c_responsible)
+        self.ui.right_column.photo_b__l.addWidget(self.ui.b_photo)
+
+        # ////////////////////////////////////////////////////////////////
+        #                 Общее построение правого меню
+        # ////////////////////////////////////////////////////////////////
 
         self.ui.b_save = PyPushButton(
             text="Сохранить",
@@ -739,24 +652,10 @@ class SetupMainWindow:
         # self.ui.b_photo.setIcon(self.icon)
         self.ui.b_cancel.setMaximumHeight(40)
 
-        #  Добавление элементов на правое меню
-        self.ui.right_column.l_name__l.addWidget(self.ui.l_l_name)
-        self.ui.right_column.name__l.addWidget(self.ui.l_name)
-        self.ui.right_column.table_role__l.addWidget(self.ui.c_table_role)
-        self.ui.right_column.login__l.addWidget(self.ui.l_login)
-        self.ui.right_column.passwd__l.addWidget(self.ui.l_passwd)
-        self.ui.right_column.age__l.addWidget(self.ui.l_age)
-        self.ui.right_column.address__l.addWidget(self.ui.l_address)
-        self.ui.right_column.telephone__l.addWidget(self.ui.l_telephone)
-        self.ui.right_column.responsible__l.addWidget(self.ui.c_responsible)
-        self.ui.right_column.photo_b__l.addWidget(self.ui.b_photo)
         self.ui.right_column.save_b__l.addWidget(self.ui.b_save)
         self.ui.right_column.save_b__l.addWidget(self.ui.b_cancel)
 
         # Сигналы
-        self.ui.b_photo.clicked.connect(lambda: get_photo())
-        self.ui.b_save.clicked.connect(lambda: save())
-        self.ui.b_cancel.clicked.connect(lambda: cancel())
 
         # Функции
 
@@ -787,62 +686,6 @@ class SetupMainWindow:
                 self.ui.photo = ph.read()
             self.ui.right_column.photo_pix.setPixmap(show_image())
 
-        def save():
-            global id_sel
-            if self.ui.add_btn.is_active() == True:
-                self.ui.add_btn.set_active(False)
-                MainFunctions.toggle_right_column(self)
-
-            if self.ui.edit_btn.is_active() == True:
-                self.ui.edit_btn.set_active(False)
-                MainFunctions.toggle_right_column(self)
-
-            l_name = self.ui.l_l_name.text()
-            name = self.ui.l_name.text()
-            role = self.ui.c_table_role.currentText()
-            id_role = dict_role[role]
-            login = self.ui.l_login.text()
-            passwd = self.ui.l_passwd.text()
-            age = int(self.ui.l_age.text())
-            address = self.ui.l_address.text()
-            telephone = self.ui.l_telephone.text()
-            responsible = self.ui.c_responsible.currentText()
-            id_responsible = dict_user[responsible]
-            photo = self.ui.photo
-            photo_path = self.ui.ospath
-
-            if id_sel == -1:
-
-                db_user = {"l_name": l_name, "name": name, "login": login, "passwd": passwd,
-                           "age": age, "address": address, "telephone": telephone, "role_id": id_role,
-                           "responsible_id": id_responsible, "photo": photo, "photo_path": photo_path}
-                User.insert(db_user).execute()
-            else:
-                for us in User.select().where(User.id == id_sel):
-                    us.l_name = l_name
-                    us.name = name
-                    us.role_id = id_role
-                    us.login = login
-                    us.passwd = passwd
-                    us.age = age
-                    us.address = address
-                    us.telephone = telephone
-                    us.responsible_id = id_responsible
-                    us.photo = photo
-                    us.photo_path = photo_path
-                    us.save()
-
-            load_rows(self.ui.table_user, User(), 'User')
-
-        def cancel():
-            if self.ui.add_btn.is_active() == True:
-                self.ui.add_btn.set_active(False)
-                MainFunctions.toggle_right_column(self)
-
-            if self.ui.edit_btn.is_active() == True:
-                self.ui.edit_btn.set_active(False)
-                MainFunctions.toggle_right_column(self)
-
         # ////////////////////////////////////////////////////////////////
         #                              Сторонники
         # ////////////////////////////////////////////////////////////////
@@ -860,8 +703,204 @@ class SetupMainWindow:
         # ////////////////////////////////////////////////////////////////
 
         # ///////////////////////////////////////////////////////////////
-        # END - EXAMPLE CUSTOM WIDGETS
+        #                           Общие функции
         # ///////////////////////////////////////////////////////////////
+
+        def cancel():
+            self.ui.add_btn.set_active(False)
+            self.ui.edit_btn.set_active(False)
+            MainFunctions.toggle_right_column(self)
+
+        def export():
+            if MainFunctions.get_page(self) == 1:
+                exportxl(self.ui.table, "Команда")
+
+        def add():
+            if not MainFunctions.right_column_is_visible(self):
+                global id_sel
+                id_sel = -1
+                if MainFunctions.get_page(self) == 1:
+                    self.ui.add_btn.set_active(True)
+                    self.ui.edit_btn.set_active(False)
+                    self.ui.l_l_name.setText(None)
+                    self.ui.l_name.setText(None)
+                    self.ui.c_table_role.setCurrentIndex(-1)
+                    self.ui.l_login.setText(None)
+                    self.ui.l_passwd.setText(None)
+                    self.ui.l_age.setText(None)
+                    self.ui.l_address.setText(None)
+                    self.ui.l_telephone.setText(None)
+                    self.ui.c_responsible.setCurrentIndex(-1)
+                    MainFunctions.toggle_right_column(self)
+
+        def edit():
+
+            try:
+                global id_sel
+                for i in self.ui.table.selectedItems():
+                    id_sel = self.ui.table.item(
+                        i.row(), len(self.users)-1).text()
+                    if not MainFunctions.right_column_is_visible(self):
+                        self.ui.edit_btn.set_active(True)
+                        self.ui.add_btn.set_active(False)
+                        if MainFunctions.get_page(self) == 1:
+                            team = User.select().where(User.id == id_sel)
+                            for t in team:
+                                self.ui.l_l_name.setText(t.l_name)
+                                self.ui.l_name.setText(t.name)
+                                self.ui.c_table_role.setCurrentIndex(
+                                    t.role_id-1)
+                                self.ui.l_login.setText(t.login)
+                                self.ui.l_passwd.setText(t.passwd)
+                                self.ui.l_age.setText(str(t.age))
+                                self.ui.l_address.setText(t.address)
+                                self.ui.l_telephone.setText(t.telephone)
+                                self.find = int(t.responsible_id)
+                                try:
+                                    self.ui.right_column.photo_pix.setPixmap(
+                                        show_image(id_sel))
+                                except:
+                                    self.ui.right_column.photo_pix.setText(
+                                        "Нет фото")
+                                    pass
+                                if self.find in dict_user.values():
+                                    cur_index = list(
+                                        dict_user.values()).index(self.find)
+                                self.ui.c_responsible.setCurrentIndex(
+                                    cur_index)
+                            MainFunctions.toggle_right_column(self)
+
+            except:
+                errors_sel()
+
+        def save():
+            global id_sel
+            self.ui.add_btn.set_active(False)
+            self.ui.edit_btn.set_active(False)
+            MainFunctions.toggle_right_column(self)
+
+            if MainFunctions.get_page(self) == 1:
+                l_name = self.ui.l_l_name.text()
+                name = self.ui.l_name.text()
+                role = self.ui.c_table_role.currentText()
+                id_role = dict_role[role]
+                login = self.ui.l_login.text()
+                passwd = self.ui.l_passwd.text()
+                age = int(self.ui.l_age.text())
+                address = self.ui.l_address.text()
+                telephone = self.ui.l_telephone.text()
+                responsible = self.ui.c_responsible.currentText()
+                id_responsible = dict_user[responsible]
+                photo = self.ui.photo
+                photo_path = self.ui.ospath
+
+                if id_sel == -1:
+
+                    db_user = {"l_name": l_name, "name": name, "login": login, "passwd": passwd,
+                               "age": age, "address": address, "telephone": telephone, "role_id": id_role,
+                               "responsible_id": id_responsible, "photo": photo, "photo_path": photo_path}
+                    User.insert(db_user).execute()
+                else:
+                    for us in User.select().where(User.id == id_sel):
+                        us.l_name = l_name
+                        us.name = name
+                        us.role_id = id_role
+                        us.login = login
+                        us.passwd = passwd
+                        us.age = age
+                        us.address = address
+                        us.telephone = telephone
+                        us.responsible_id = id_responsible
+                        us.photo = photo
+                        us.photo_path = photo_path
+                        us.save()
+
+                load_rows(self.ui.table, User(), 'User')
+
+        def delete():
+            try:
+                global id_sel
+                for i in self.ui.table.selectedItems():
+                    id_sel = self.ui.table.item(
+                        i.row(), len(self.users)-1).text()
+                    if not MainFunctions.right_column_is_visible(self):
+                        self.ui.edit_btn.set_active(False)
+                        self.ui.add_btn.set_active(False)
+
+                        if MainFunctions.get_page(self) == 1:
+                            team = User.get(User.id == id_sel)
+                            team.delete_instance()
+                            load_rows(self.ui.table, User(), 'User')
+
+            except:
+                errors_sel()
+
+        def search():
+            global ch
+            global select_item
+
+            if select_item == self.ui.find_l.text():
+                ch += 1
+            else:
+                ch = 0
+                select_item = self.ui.find_l.text()
+            self.ui.table.setCurrentItem(None)
+            if not select_item:
+                return
+
+            try:
+                search_item = self.ui.table.findItems(
+                    select_item, Qt.MatchContains)
+                if search_item:
+                    try:
+                        item = search_item[ch]
+                        self.ui.table.setCurrentItem(item)
+                    except:
+                        ch = -1
+
+            except:
+                errors_sel()
+
+        def exportxl(name):
+            columnheaders = []
+            date = QDate.currentDate().toString('dd-MM-yyyy')
+            for j in range(self.ui.table.model().columnCount()):
+                columnheaders.append(
+                    self.ui.table.horizontalHeaderItem(j).text())
+
+            df = pd.DataFrame(columns=columnheaders)
+
+            for row in range(self.ui.table.rowCount()):
+                for col in range(self.ui.table.columnCount()):
+                    if col == 0:
+                        pass
+                    else:
+                        df.at[row, columnheaders[col]] = self.ui.table.item(
+                            row, col).text()
+
+            df.to_excel(f'{date} отчёт {name}.xlsx', index=False)
+
+        # ///////////////////////////////////////////////////////////////
+        #                           Сигналы
+        # ///////////////////////////////////////////////////////////////
+
+        # ----------------------- Главная форма --------------------------
+
+        # Общие
+        self.ui.add_btn.clicked.connect(lambda: add())
+        self.ui.edit_btn.clicked.connect(lambda: edit())
+        self.ui.delete_btn.clicked.connect(lambda: delete())
+        self.ui.export_btn.clicked.connect(lambda: export())
+        self.ui.search_btn.clicked.connect(lambda: search())
+
+        # ------------------------- Правое меню ----------------------------
+
+        # Общие
+        self.ui.b_save.clicked.connect(lambda: save())
+        self.ui.b_cancel.clicked.connect(lambda: cancel())
+
+        # Команда
+        self.ui.b_photo.clicked.connect(lambda: get_photo())
 
     # RESIZE GRIPS AND CHANGE POSITION
     # Resize or change position when window is resized

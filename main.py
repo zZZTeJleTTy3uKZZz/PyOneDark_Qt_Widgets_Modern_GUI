@@ -122,53 +122,92 @@ class MainWindow(QMainWindow):
 
         
 
-        # LEFT MENU
+        # Левое меню
         # ///////////////////////////////////////////////////////////////
 
-        # HOME BTN
+        # Домой
         if btn.objectName() == "btn_home":
             # Select Menu
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load Page 1
-            MainFunctions.set_page(self, self.ui.load_pages.page_1)
-            if not MainFunctions.right_column_is_visible(self):
+            MainFunctions.set_page(self, self.ui.load_pages.p_hub)
+            if MainFunctions.right_column_is_visible(self):
                 MainFunctions.toggle_right_column(self)
                 self.ui.edit_btn.set_active(False)
                 self.ui.add_btn.set_active(False)
+            print(MainFunctions.get_page(self))
 
-        # WIDGETS BTN
+
+        # Команда
         if btn.objectName() == "btn_team":
             # Select Menu
             self.ui.left_menu.select_only_one(btn.objectName())
 
             # Load Page 2
             MainFunctions.set_page(self, self.ui.load_pages.p_team)
+            if MainFunctions.right_column_is_visible(self):
+                MainFunctions.toggle_right_column(self)
+                self.ui.edit_btn.set_active(False)
+                self.ui.add_btn.set_active(False)
+            print(MainFunctions.get_page(self))
 
-
-        if btn.objectName() == "delete_btn":
-            self.ui.left_menu.select_only_one(btn.objectName())
-
-            # Load Page 1
-            MainFunctions.set_page(self, self.ui.load_pages.page_1)
-
-
-
-
-
-
-
-
-
-
-
-        # LOAD USER PAGE
-        if btn.objectName() == "btn_add_user":
+        # Команда
+        if btn.objectName() == "btn_storonnik":
             # Select Menu
             self.ui.left_menu.select_only_one(btn.objectName())
 
-            # Load Page 3
-            MainFunctions.set_page(self, self.ui.load_pages.page_3)
+            # Load Page 2
+            MainFunctions.set_page(self, self.ui.load_pages.p_storonnik)
+            if MainFunctions.right_column_is_visible(self):
+                MainFunctions.toggle_right_column(self)
+                self.ui.edit_btn.set_active(False)
+                self.ui.add_btn.set_active(False)
+            print(MainFunctions.get_page(self))
+
+        # Команда
+        if btn.objectName() == "btn_event":
+            # Select Menu
+            self.ui.left_menu.select_only_one(btn.objectName())
+
+            # Load Page 2
+            MainFunctions.set_page(self, self.ui.load_pages.p_event)
+            if MainFunctions.right_column_is_visible(self):
+                MainFunctions.toggle_right_column(self)
+                self.ui.edit_btn.set_active(False)
+                self.ui.add_btn.set_active(False)
+            print(MainFunctions.get_page(self))
+
+        # Команда
+        if btn.objectName() == "btn_kpi":
+            # Select Menu
+            self.ui.left_menu.select_only_one(btn.objectName())
+
+            # Load Page 2
+            MainFunctions.set_page(self, self.ui.load_pages.p_kpi)
+            if MainFunctions.right_column_is_visible(self):
+                MainFunctions.toggle_right_column(self)
+                self.ui.edit_btn.set_active(False)
+                self.ui.add_btn.set_active(False)
+            print(MainFunctions.get_page(self))
+
+        # Команда
+        if btn.objectName() == "btn_quote":
+            # Select Menu
+            self.ui.left_menu.select_only_one(btn.objectName())
+
+            # Load Page 2
+            MainFunctions.set_page(self, self.ui.load_pages.p_quote)
+            if MainFunctions.right_column_is_visible(self):
+                MainFunctions.toggle_right_column(self)
+                self.ui.edit_btn.set_active(False)
+                self.ui.add_btn.set_active(False)
+            print(MainFunctions.get_page(self))
+
+
+
+
+
 
         # BOTTOM INFORMATION
         if btn.objectName() == "btn_profile":

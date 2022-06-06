@@ -71,3 +71,7 @@ from . py_line_edit import PyLineEdit
 from . py_table_widget import PyTableWidget
 
 from . py_page import PyPage
+
+from . py_scroll_area import PyScrollArea
+
+from .py_combo_box import PyComboBox

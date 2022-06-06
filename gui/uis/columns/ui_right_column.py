@@ -8,18 +8,12 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QSizePolicy,
-    QStackedWidget, QVBoxLayout, QWidget)
+from qt_core import *
 
 class Ui_RightColumn(object):
     def setupUi(self, RightColumn):
+        themes = Themes()
+        self.themes = themes.items
         if not RightColumn.objectName():
             RightColumn.setObjectName(u"RightColumn")
         RightColumn.resize(218, 878)
@@ -35,7 +29,28 @@ class Ui_RightColumn(object):
         self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(5, 5, 5, 5)
-        self.name_2 = QLabel(self.users_menu)
+        self.scrollArea = PyScrollArea(self.users_menu,
+        border_size=2,
+        color=self.themes["app_color"]["text_foreground"],
+        bg_color=self.themes["app_color"]["bg_two"],
+        bg_color_hover=self.themes["app_color"]["dark_three"],
+        bg_color_pressed=self.themes["app_color"]["dark_three"],
+        context_color=self.themes["app_color"]["context_color"],
+        scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+        scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+        )
+        self.scrollArea.setObjectName(u"scrollArea")
+
+        self.scrollArea.setFrameShape(QFrame.NoFrame)
+        self.scrollArea.setFrameShadow(QFrame.Plain)
+        self.scrollArea.setLineWidth(0)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 198, 858))
+        self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.name_2 = QLabel(self.scrollAreaWidgetContents)
         self.name_2.setObjectName(u"name_2")
         self.name_2.setMinimumSize(QSize(0, 30))
         self.name_2.setMaximumSize(QSize(16777215, 30))
@@ -45,90 +60,90 @@ class Ui_RightColumn(object):
         self.name_2.setStyleSheet(u"font-size: 16pt")
         self.name_2.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.name_2)
+        self.verticalLayout_3.addWidget(self.name_2)
 
-        self.l_name = QWidget(self.users_menu)
+        self.l_name = QWidget(self.scrollAreaWidgetContents)
         self.l_name.setObjectName(u"l_name")
         self.l_name.setMinimumSize(QSize(0, 50))
         self.l_name.setMaximumSize(QSize(16777215, 50))
         self.l_name__l = QHBoxLayout(self.l_name)
         self.l_name__l.setObjectName(u"l_name__l")
 
-        self.verticalLayout.addWidget(self.l_name)
+        self.verticalLayout_3.addWidget(self.l_name)
 
-        self.name = QWidget(self.users_menu)
+        self.name = QWidget(self.scrollAreaWidgetContents)
         self.name.setObjectName(u"name")
         self.name.setMinimumSize(QSize(0, 50))
         self.name.setMaximumSize(QSize(16777215, 50))
         self.name__l = QHBoxLayout(self.name)
         self.name__l.setObjectName(u"name__l")
 
-        self.verticalLayout.addWidget(self.name)
+        self.verticalLayout_3.addWidget(self.name)
 
-        self.table_role = QWidget(self.users_menu)
+        self.table_role = QWidget(self.scrollAreaWidgetContents)
         self.table_role.setObjectName(u"table_role")
         self.table_role.setMinimumSize(QSize(0, 50))
         self.table_role.setMaximumSize(QSize(16777215, 50))
         self.table_role__l = QHBoxLayout(self.table_role)
         self.table_role__l.setObjectName(u"table_role__l")
 
-        self.verticalLayout.addWidget(self.table_role)
+        self.verticalLayout_3.addWidget(self.table_role)
 
-        self.login = QWidget(self.users_menu)
+        self.login = QWidget(self.scrollAreaWidgetContents)
         self.login.setObjectName(u"login")
         self.login.setMinimumSize(QSize(0, 50))
         self.login.setMaximumSize(QSize(16777215, 50))
         self.login__l = QHBoxLayout(self.login)
         self.login__l.setObjectName(u"login__l")
 
-        self.verticalLayout.addWidget(self.login)
+        self.verticalLayout_3.addWidget(self.login)
 
-        self.passwd = QWidget(self.users_menu)
+        self.passwd = QWidget(self.scrollAreaWidgetContents)
         self.passwd.setObjectName(u"passwd")
         self.passwd.setMinimumSize(QSize(0, 50))
         self.passwd.setMaximumSize(QSize(16777215, 50))
         self.passwd__l = QHBoxLayout(self.passwd)
         self.passwd__l.setObjectName(u"passwd__l")
 
-        self.verticalLayout.addWidget(self.passwd)
+        self.verticalLayout_3.addWidget(self.passwd)
 
-        self.age = QWidget(self.users_menu)
+        self.age = QWidget(self.scrollAreaWidgetContents)
         self.age.setObjectName(u"age")
         self.age.setMinimumSize(QSize(0, 50))
         self.age.setMaximumSize(QSize(16777215, 50))
         self.age__l = QHBoxLayout(self.age)
         self.age__l.setObjectName(u"age__l")
 
-        self.verticalLayout.addWidget(self.age)
+        self.verticalLayout_3.addWidget(self.age)
 
-        self.address = QWidget(self.users_menu)
+        self.address = QWidget(self.scrollAreaWidgetContents)
         self.address.setObjectName(u"address")
         self.address.setMinimumSize(QSize(0, 50))
         self.address.setMaximumSize(QSize(16777215, 50))
         self.address__l = QHBoxLayout(self.address)
         self.address__l.setObjectName(u"address__l")
 
-        self.verticalLayout.addWidget(self.address)
+        self.verticalLayout_3.addWidget(self.address)
 
-        self.telephone = QWidget(self.users_menu)
+        self.telephone = QWidget(self.scrollAreaWidgetContents)
         self.telephone.setObjectName(u"telephone")
         self.telephone.setMinimumSize(QSize(0, 50))
         self.telephone.setMaximumSize(QSize(16777215, 50))
         self.telephone__l = QHBoxLayout(self.telephone)
         self.telephone__l.setObjectName(u"telephone__l")
 
-        self.verticalLayout.addWidget(self.telephone)
+        self.verticalLayout_3.addWidget(self.telephone)
 
-        self.responsible = QWidget(self.users_menu)
+        self.responsible = QWidget(self.scrollAreaWidgetContents)
         self.responsible.setObjectName(u"responsible")
         self.responsible.setMinimumSize(QSize(0, 50))
         self.responsible.setMaximumSize(QSize(16777215, 50))
         self.responsible__l = QHBoxLayout(self.responsible)
         self.responsible__l.setObjectName(u"responsible__l")
 
-        self.verticalLayout.addWidget(self.responsible)
+        self.verticalLayout_3.addWidget(self.responsible)
 
-        self.photo_pix = QLabel(self.users_menu)
+        self.photo_pix = QLabel(self.scrollAreaWidgetContents)
         self.photo_pix.setObjectName(u"photo_pix")
         self.photo_pix.setMinimumSize(QSize(0, 150))
         self.photo_pix.setMaximumSize(QSize(16777215, 150))
@@ -136,34 +151,38 @@ class Ui_RightColumn(object):
         self.photo_pix.setStyleSheet(u"font-size: 16pt")
         self.photo_pix.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.photo_pix)
+        self.verticalLayout_3.addWidget(self.photo_pix)
 
-        self.div = QLabel(self.users_menu)
+        self.div = QLabel(self.scrollAreaWidgetContents)
         self.div.setObjectName(u"div")
         self.div.setMaximumSize(QSize(16777215, 167777))
         self.div.setFont(font)
         self.div.setStyleSheet(u"font-size: 16pt")
         self.div.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.div)
+        self.verticalLayout_3.addWidget(self.div)
 
-        self.photo_b = QWidget(self.users_menu)
+        self.photo_b = QWidget(self.scrollAreaWidgetContents)
         self.photo_b.setObjectName(u"photo_b")
         self.photo_b.setMinimumSize(QSize(0, 50))
         self.photo_b.setMaximumSize(QSize(16777215, 50))
         self.photo_b__l = QHBoxLayout(self.photo_b)
         self.photo_b__l.setObjectName(u"photo_b__l")
 
-        self.verticalLayout.addWidget(self.photo_b)
+        self.verticalLayout_3.addWidget(self.photo_b)
 
-        self.save_b = QWidget(self.users_menu)
+        self.save_b = QWidget(self.scrollAreaWidgetContents)
         self.save_b.setObjectName(u"save_b")
         self.save_b.setMinimumSize(QSize(0, 50))
         self.save_b.setMaximumSize(QSize(16777215, 50))
         self.save_b__l = QHBoxLayout(self.save_b)
         self.save_b__l.setObjectName(u"save_b__l")
 
-        self.verticalLayout.addWidget(self.save_b)
+        self.verticalLayout_3.addWidget(self.save_b)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+        self.verticalLayout.addWidget(self.scrollArea)
 
         self.menus.addWidget(self.users_menu)
         self.menu_2 = QWidget()

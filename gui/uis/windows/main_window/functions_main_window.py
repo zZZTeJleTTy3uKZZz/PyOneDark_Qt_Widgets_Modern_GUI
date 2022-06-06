@@ -43,6 +43,10 @@ class MainFunctions():
     def set_page(self, page):
         self.ui.load_pages.pages.setCurrentWidget(page)
 
+    def get_page(self):
+            name = self.ui.load_pages.pages.currentIndex()
+            return name
+
     # SET LEFT COLUMN PAGES
     # ///////////////////////////////////////////////////////////////
     def set_left_column_menu(
