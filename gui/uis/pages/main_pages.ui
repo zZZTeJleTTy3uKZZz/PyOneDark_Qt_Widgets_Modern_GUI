@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>860</width>
-    <height>456</height>
+    <width>760</width>
+    <height>647</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,117 +34,110 @@
      <property name="currentIndex">
       <number>6</number>
      </property>
-     <widget class="QWidget" name="p_auth">
-      <property name="styleSheet">
-       <string notr="true">font-size: 14pt</string>
-      </property>
-      <layout class="QVBoxLayout" name="page_1_layout">
-       <property name="spacing">
-        <number>5</number>
-       </property>
-       <property name="leftMargin">
-        <number>5</number>
-       </property>
-       <property name="topMargin">
-        <number>5</number>
-       </property>
-       <property name="rightMargin">
-        <number>5</number>
-       </property>
-       <property name="bottomMargin">
-        <number>5</number>
-       </property>
-       <item alignment="Qt::AlignHCenter">
-        <widget class="QFrame" name="welcome_base">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>300</width>
-           <height>150</height>
-          </size>
+     <widget class="QWidget" name="page_auth">
+      <layout class="QVBoxLayout" name="verticalLayout_13">
+       <item>
+        <widget class="QScrollArea" name="scroll_area_7">
+         <property name="styleSheet">
+          <string notr="true">background: transparent</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
-         <layout class="QVBoxLayout" name="center_page_layout">
-          <property name="spacing">
-           <number>10</number>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="contents_7">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>732</width>
+            <height>619</height>
+           </rect>
           </property>
-          <property name="leftMargin">
-           <number>0</number>
+          <property name="styleSheet">
+           <string notr="true">background: transparent;</string>
           </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QFrame" name="logo">
-            <property name="minimumSize">
-             <size>
-              <width>300</width>
-              <height>120</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>300</width>
-              <height>120</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QVBoxLayout" name="logo_layout">
-             <property name="spacing">
-              <number>0</number>
+          <layout class="QVBoxLayout" name="verticalLayout_12">
+           <property name="spacing">
+            <number>15</number>
+           </property>
+           <property name="leftMargin">
+            <number>5</number>
+           </property>
+           <property name="topMargin">
+            <number>5</number>
+           </property>
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>5</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="title_label_7">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
              </property>
-             <property name="leftMargin">
-              <number>0</number>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
              </property>
-             <property name="topMargin">
-              <number>0</number>
+             <property name="styleSheet">
+              <string notr="true">font-size: 16pt</string>
              </property>
-             <property name="rightMargin">
-              <number>0</number>
+             <property name="text">
+              <string>Авторизация</string>
              </property>
-             <property name="bottomMargin">
-              <number>0</number>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="font">
-             <font>
-              <pointsize>14</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>Партия «Новые люди»</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Maximum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>10</width>
+               <height>15</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="row_1_layout_7"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="row_2_layout_7"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="row_3_layout_7"/>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="row_4_layout_7"/>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="row_5_layout_7"/>
+           </item>
+          </layout>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -169,7 +162,7 @@
        <item>
         <widget class="QScrollArea" name="scroll_area">
          <property name="styleSheet">
-          <string notr="true">background: transparent;</string>
+          <string notr="true">background: transparent</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -188,8 +181,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>840</width>
-            <height>436</height>
+            <width>740</width>
+            <height>627</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -277,7 +270,7 @@
        <item>
         <widget class="QScrollArea" name="scroll_area_2">
          <property name="styleSheet">
-          <string notr="true">background: transparent;</string>
+          <string notr="true">background: transparent</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -296,8 +289,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>832</width>
-            <height>428</height>
+            <width>732</width>
+            <height>619</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -385,7 +378,7 @@
        <item>
         <widget class="QScrollArea" name="scroll_area_3">
          <property name="styleSheet">
-          <string notr="true">background: transparent;</string>
+          <string notr="true">background: transparent</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -404,8 +397,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>832</width>
-            <height>428</height>
+            <width>732</width>
+            <height>619</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -493,7 +486,7 @@
        <item>
         <widget class="QScrollArea" name="scroll_area_4">
          <property name="styleSheet">
-          <string notr="true">background: transparent;</string>
+          <string notr="true">background: transparent</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -512,8 +505,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>832</width>
-            <height>428</height>
+            <width>732</width>
+            <height>619</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -601,7 +594,7 @@
        <item>
         <widget class="QScrollArea" name="scroll_area_5">
          <property name="styleSheet">
-          <string notr="true">background: transparent;</string>
+          <string notr="true">background: transparent</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -620,8 +613,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>832</width>
-            <height>428</height>
+            <width>732</width>
+            <height>619</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -709,7 +702,7 @@
        <item>
         <widget class="QScrollArea" name="scroll_area_6">
          <property name="styleSheet">
-          <string notr="true">background: transparent;</string>
+          <string notr="true">background: transparent</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -728,8 +721,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>832</width>
-            <height>428</height>
+            <width>732</width>
+            <height>619</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -752,30 +745,6 @@
             <number>5</number>
            </property>
            <item>
-            <widget class="QLabel" name="title_label_6">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>16</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">font-size: 16pt</string>
-             </property>
-             <property name="text">
-              <string>Главная страница</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item>
             <spacer name="verticalSpacer_6">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -795,13 +764,64 @@
             <layout class="QHBoxLayout" name="row_1_layout_6"/>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="row_2_layout_6"/>
+            <layout class="QHBoxLayout" name="row_2_layout_6">
+             <item>
+              <widget class="QLabel" name="title_label_8">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>20</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font-size: 20pt;
+color: rgb(10, 209, 201);</string>
+               </property>
+               <property name="text">
+                <string>В жизни нет ничего лучше собственного опыта !</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <layout class="QHBoxLayout" name="row_3_layout_6"/>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="row_4_layout_6"/>
+            <layout class="QVBoxLayout" name="row_4_layout_6">
+             <item>
+              <widget class="QLabel" name="title_label_9">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font-size: 11pt</string>
+               </property>
+               <property name="text">
+                <string>Приятной работы :)</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <layout class="QVBoxLayout" name="row_5_layout_6"/>

@@ -64,9 +64,47 @@ def create_storonnik():
     ]
     Storonnik.insert_many(storonniks).execute()
 
+
+def create_e_types():
+    e_types = [
+        {'name':'Акция'},
+        {'name':'Мероприятие'},
+        {'name':'Социальный опрос'},
+        {'name':'Интенсив'},
+        {'name':'Интервью'},
+        {'name':'Обращение'},
+        {'name':'Ответы на вопросы'},
+        {'name':'Встреча'},
+        {'name':'Перфоманс'}
+    ]
+
+    E_type.insert_many(e_types).execute()
+
+
+def create_events():
+    usersid = User.select()
+    e_typesid = E_type.select()
+    events = [
+        {'e_type_id':e_typesid[8], 'name':'Создание CRM', 'budget':0, 'responsible':usersid[8], 'desc':'Разработка CRM Системы и успешная сдача курсового проекта'},
+        {'e_type_id':e_typesid[0], 'name':'Выгул собак', 'budget':1000, 'responsible':usersid[9], 'desc':'Какое-то описание'},
+        {'e_type_id':e_typesid[1], 'name':'Чаепитие', 'budget':500, 'responsible':usersid[9], 'desc':'Какое-то описание'},
+        {'e_type_id':e_typesid[5], 'name':'Замена пандуса', 'budget':1200, 'responsible':usersid[10], 'desc':'Какое-то описание'},
+        {'e_type_id':e_typesid[2], 'name':'Хватает ли МРОТ для выживания', 'budget':5000, 'responsible':usersid[8], 'desc':'Какое-то описание'},
+        {'e_type_id':e_typesid[2], 'name':'Позвони родителям', 'budget':4000, 'responsible':usersid[8], 'desc':'Как часто вы говорите своим родителям слова любви и благодарности'},
+        {'e_type_id':e_typesid[7], 'name':'Ликвидация маршруток', 'budget':50, 'responsible':usersid[10], 'desc':'Какое-то описание'},
+        {'e_type_id':e_typesid[0], 'name':'Раздача ёлочных шаров', 'budget':200000, 'responsible':usersid[8], 'desc':'Какое-то описание'},
+        {'e_type_id':e_typesid[1], 'name':'МК - как стать активистом партии «Новые люди»', 'budget':1000, 'responsible':usersid[10], 'desc':''},
+        {'e_type_id':e_typesid[3], 'name':'Интенсив №1', 'budget':30000, 'responsible':usersid[9], 'desc':''},
+        {'e_type_id':e_typesid[6], 'name':'Ликбез', 'budget':2000, 'responsible':usersid[8], 'desc':'Меньше знаешь - крепче спишь'},
+     ]
+
+    Event.insert_many(events).execute()
+
 with db:
-    db.create_tables([Role, User, Storonnik, E_type, Event, Action, Kpi, Quote, Loyality])
-    create_role()
-    create_user()
-    create_loyality()
-    create_storonnik()
+    # db.create_tables([Role, User, Storonnik, E_type, Event, Action, Kpi, Quote, Loyality])
+    # create_role()
+    # create_user()
+    # create_loyality()
+    # create_storonnik()
+    create_e_types()
+    create_events()

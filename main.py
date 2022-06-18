@@ -191,7 +191,7 @@ class MainWindow(QMainWindow):
 
 
         # BOTTOM INFORMATION
-        if btn.objectName() == "btn_profile":
+        if btn.objectName() == "btn_profile1":
             # CHECK IF LEFT COLUMN IS VISIBLE
             if not MainFunctions.left_column_is_visible(self):
                 self.ui.left_menu.select_only_one_tab(btn.objectName())
@@ -218,27 +218,8 @@ class MainWindow(QMainWindow):
 
         # SETTINGS LEFT
         if btn.objectName() == "btn_leave" or btn.objectName() == "btn_close_left_column":
-            # CHECK IF LEFT COLUMN IS VISIBLE
-            if not MainFunctions.left_column_is_visible(self):
-                # Show / Hide
-                MainFunctions.toggle_left_column(self)
-                self.ui.left_menu.select_only_one_tab(btn.objectName())
-            else:
-                if btn.objectName() == "btn_close_left_column":
-                    self.ui.left_menu.deselect_all_tab()
-                    # Show / Hide
-                    MainFunctions.toggle_left_column(self)
-                self.ui.left_menu.select_only_one_tab(btn.objectName())
-
-            # Change Left Column Menu
-            if btn.objectName() != "btn_close_left_column":
-                MainFunctions.set_left_column_menu(
-                    self,
-                    menu=self.ui.left_column.menus.menu_1,
-                    title="Settings Left Column",
-                    icon_path=Functions.set_svg_icon("icon_settings.svg")
-                )
-
+            MainFunctions.set_page(self, self.ui.load_pages.page_auth)
+            SetupMainWindow.adaptive(self)
         # TITLE BAR MENU
         # ///////////////////////////////////////////////////////////////
 
@@ -266,19 +247,18 @@ class MainWindow(QMainWindow):
                 self, "btn_settings")
             top_settings.set_active_tab(False)
 
-        if btn.objectName() == "btn_search":
-            btn.hide()
+        if btn.objectName() == "btn_profile":
             # Скрытие и раскрытие левого меню
             # profile = MainFunctions.get_title_bar_btn(self, "btn_profile")
             # profile.hide()
-            # if self.ui.left_menu.isVisible():
-            #     self.ui.left_menu_frame.setMinimumSize(0,0)
-            #     self.ui.left_menu.hide()
-            # else:
-            #     left_menu_margin = self.settings["left_menu_content_margins"]
-            #     left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
-            #     self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
-            #     self.ui.left_menu.show()
+            if self.ui.left_menu.isVisible():
+                self.ui.left_menu_frame.setMinimumSize(0,0)
+                self.ui.left_menu.hide()
+            else:
+                left_menu_margin = self.settings["left_menu_content_margins"]
+                left_menu_minimum = self.settings["lef_menu_size"]["minimum"]
+                self.ui.left_menu_frame.setMinimumSize(left_menu_minimum + (left_menu_margin * 2), 0)
+                self.ui.left_menu.show()
             pass
         # DEBUG
 

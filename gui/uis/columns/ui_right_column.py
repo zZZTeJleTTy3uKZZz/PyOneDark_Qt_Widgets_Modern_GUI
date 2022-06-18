@@ -9,9 +9,12 @@
 ################################################################################
 
 from qt_core import *
+from gui.core.json_themes import Themes
 
 class Ui_RightColumn(object):
     def setupUi(self, RightColumn):
+        themes = Themes()
+        self.themes = themes.items
         if not RightColumn.objectName():
             RightColumn.setObjectName(u"RightColumn")
         RightColumn.resize(219, 627)
@@ -38,7 +41,6 @@ class Ui_RightColumn(object):
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
         )
         self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setStyleSheet(u"")
         self.scrollArea.setFrameShape(QFrame.NoFrame)
         self.scrollArea.setFrameShadow(QFrame.Plain)
         self.scrollArea.setLineWidth(0)
@@ -69,6 +71,15 @@ class Ui_RightColumn(object):
 
         self.verticalLayout_3.addWidget(self.l_name)
 
+        self.name = QWidget(self.scrollAreaWidgetContents)
+        self.name.setObjectName(u"name")
+        self.name.setMinimumSize(QSize(0, 50))
+        self.name.setMaximumSize(QSize(16777215, 50))
+        self.name__l = QHBoxLayout(self.name)
+        self.name__l.setObjectName(u"name__l")
+
+        self.verticalLayout_3.addWidget(self.name)
+
         self.table_role = QWidget(self.scrollAreaWidgetContents)
         self.table_role.setObjectName(u"table_role")
         self.table_role.setMinimumSize(QSize(0, 50))
@@ -84,14 +95,7 @@ class Ui_RightColumn(object):
         self.login.setMaximumSize(QSize(16777215, 50))
         self.login__l = QHBoxLayout(self.login)
         self.login__l.setObjectName(u"login__l")
-        self.name = QWidget(self.login)
-        self.name.setObjectName(u"name")
-        self.name.setMinimumSize(QSize(0, 50))
-        self.name.setMaximumSize(QSize(16777215, 50))
-        self.name__l = QHBoxLayout(self.name)
-        self.name__l.setObjectName(u"name__l")
-
-        self.login__l.addWidget(self.name)
+       
 
 
         self.verticalLayout_3.addWidget(self.login)
@@ -198,7 +202,6 @@ class Ui_RightColumn(object):
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
         )
         self.scrollArea_3.setObjectName(u"scrollArea_3")
-        self.scrollArea_3.setStyleSheet(u"")
         self.scrollArea_3.setFrameShape(QFrame.NoFrame)
         self.scrollArea_3.setFrameShadow(QFrame.Plain)
         self.scrollArea_3.setLineWidth(0)
@@ -302,7 +305,6 @@ class Ui_RightColumn(object):
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
         )
         self.scrollArea_2.setObjectName(u"scrollArea_2")
-        self.scrollArea_2.setStyleSheet(u"")
         self.scrollArea_2.setFrameShape(QFrame.NoFrame)
         self.scrollArea_2.setFrameShadow(QFrame.Plain)
         self.scrollArea_2.setLineWidth(0)
@@ -442,7 +444,6 @@ class Ui_RightColumn(object):
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
         )
         self.scrollArea_4.setObjectName(u"scrollArea_4")
-        self.scrollArea_4.setStyleSheet(u"")
         self.scrollArea_4.setFrameShape(QFrame.NoFrame)
         self.scrollArea_4.setFrameShadow(QFrame.Plain)
         self.scrollArea_4.setLineWidth(0)
@@ -546,7 +547,6 @@ class Ui_RightColumn(object):
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
         )
         self.scrollArea_5.setObjectName(u"scrollArea_5")
-        self.scrollArea_5.setStyleSheet(u"")
         self.scrollArea_5.setFrameShape(QFrame.NoFrame)
         self.scrollArea_5.setFrameShadow(QFrame.Plain)
         self.scrollArea_5.setLineWidth(0)
@@ -650,7 +650,6 @@ class Ui_RightColumn(object):
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
         )
         self.scrollArea_6.setObjectName(u"scrollArea_6")
-        self.scrollArea_6.setStyleSheet(u"")
         self.scrollArea_6.setFrameShape(QFrame.NoFrame)
         self.scrollArea_6.setFrameShadow(QFrame.Plain)
         self.scrollArea_6.setLineWidth(0)

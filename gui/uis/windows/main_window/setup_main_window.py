@@ -87,7 +87,7 @@ class SetupMainWindow:
             "is_active": False
         },
         {
-            "btn_icon": "_icon_team.svg",
+            "btn_icon": "_icon_storonniks.svg",
             "btn_id": "btn_storonnik",
             "btn_text": "Перейти к Сторонникам",
             "btn_tooltip": "Сторонники",
@@ -95,37 +95,37 @@ class SetupMainWindow:
             "is_active": False
         },
         {
-            "btn_icon": "_icon_team.svg",
+            "btn_icon": "_icon_event.svg",
             "btn_id": "btn_event",
             "btn_text": "Перейти к меропритиям",
             "btn_tooltip": "Мероприятия",
             "show_top": True,
             "is_active": False
         },
-        {
-            "btn_icon": "_icon_team.svg",
-            "btn_id": "btn_kpi",
-            "btn_text": "Перейти к KPI",
-            "btn_tooltip": "KPI",
-            "show_top": True,
-            "is_active": False
-        },
-        {
-            "btn_icon": "_icon_team.svg",
-            "btn_id": "btn_quote",
-            "btn_text": "Добавить цитату",
-            "btn_tooltip": "Цитаты",
-            "show_top": True,
-            "is_active": False
-        },
-        {
-            "btn_icon": "_icon_profile.svg",
-            "btn_id": "btn_profile",
-            "btn_text": "Открыть профиль",
-            "btn_tooltip": "Профиль",
-            "show_top": False,
-            "is_active": False
-        },
+        # {
+        #     "btn_icon": "_icon_task.svg",
+        #     "btn_id": "btn_kpi",
+        #     "btn_text": "Перейти к KPI",
+        #     "btn_tooltip": "KPI",
+        #     "show_top": True,
+        #     "is_active": False
+        # },
+        # {
+        #     "btn_icon": "_icon_quote.svg",
+        #     "btn_id": "btn_quote",
+        #     "btn_text": "Добавить цитату",
+        #     "btn_tooltip": "Цитаты",
+        #     "show_top": True,
+        #     "is_active": False
+        # },
+        # {
+        #     "btn_icon": "_icon_profile.svg",
+        #     "btn_id": "btn_profile",
+        #     "btn_text": "Открыть профиль",
+        #     "btn_tooltip": "Профиль",
+        #     "show_top": False,
+        #     "is_active": False
+        # },
         {
             "btn_icon": "_icon_leave.svg",
             "btn_id": "btn_leave",
@@ -223,7 +223,7 @@ class SetupMainWindow:
 
         # SET INITIAL PAGE / SET LEFT AND RIGHT COLUMN MENUS
         # ///////////////////////////////////////////////////////////////
-        MainFunctions.set_page(self, self.ui.load_pages.p_auth)
+        MainFunctions.set_page(self, self.ui.load_pages.p_hub)
         MainFunctions.set_left_column_menu(
             self,
             menu=self.ui.left_column.menus.menu_1,
@@ -355,6 +355,24 @@ class SetupMainWindow:
             bg_color_pressed=self.themes["app_color"]["pink"]
         )
 
+        self.ui.action_btn = PyIconButton(
+            icon_path=Functions.set_svg_icon("_icon_action.svg"),
+            parent=self,
+            app_parent=self.ui.central_widget,
+            tooltip_text="Добавить активность",
+            width=36,
+            height=36,
+            radius=12,
+            dark_one=self.themes["app_color"]["dark_one"],
+            icon_color=self.themes["app_color"]["icon_color"],
+            icon_color_hover=self.themes["app_color"]["icon_hover"],
+            icon_color_pressed=self.themes["app_color"]["icon_active"],
+            icon_color_active=self.themes["app_color"]["icon_active"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["pink"]
+        )
+
         # Добавление таблицы
 
         self.ui.table = PyTableWidget(
@@ -401,14 +419,82 @@ class SetupMainWindow:
         # ////////////////////////////////////////////////////////////////
 
         # Добавление лого
-        self.logo_svg = QSvgWidget(Functions.set_svg_image("logo_home.svg"))
-        self.ui.load_pages.logo_layout.addWidget(
+        self.logo_svg = QSvgWidget(Functions.set_svg_image("stav.svg"))
+        self.logo_svg.setFixedSize(350, 340)
+        self.ui.load_pages.row_1_layout_7.addWidget(
             self.logo_svg, Qt.AlignCenter, Qt.AlignCenter)
+
+        self.ui.l_login_auth = PyLineEdit(
+            text="",
+            place_holder_text="Логин",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Логин",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_login_auth.setMinimumHeight(40)
+
+        self.ui.l_passwd_auth = PyLineEdit(
+            text="",
+            place_holder_text="Пароль",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Пароль",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_passwd_auth.setMinimumHeight(40)
+        self.ui.l_passwd_auth.setEchoMode(QLineEdit.Password)
+
+        self.ui.b_auth = PyPushButton(
+            text="Войти",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.ui.b_auth.setMaximumHeight(40)
+        self.ui.b_auth.setMinimumHeight(40)
+
+        self.ui.b_spros = PyPushButton(
+            text="Помощь",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"]
+        )
+        self.ui.b_spros.setMaximumHeight(40)
+        self.ui.b_spros.setMinimumHeight(40)
+
+        self.ui.debug = QLabel()
+        self.ui.debug.setText("Неправильный логин или пароль")
+        self.ui.debug.setStyleSheet(u"font-size: 16pt")
+        self.ui.debug.setAlignment(Qt.AlignCenter)
+
+        self.ui.load_pages.row_2_layout_7.addWidget(self.ui.l_login_auth)
+        self.ui.load_pages.row_3_layout_7.addWidget(self.ui.l_passwd_auth)
+        self.ui.load_pages.row_4_layout_7.addWidget(self.ui.debug)
+        self.ui.load_pages.row_5_layout_7.addWidget(self.ui.b_auth)
+        self.ui.load_pages.row_5_layout_7.addWidget(self.ui.b_spros)
 
         # ////////////////////////////////////////////////////////////////
         #                              Команда
         # ////////////////////////////////////////////////////////////////
-        
 
         # ------------------------------------------
         #               Правое меню
@@ -612,13 +698,401 @@ class SetupMainWindow:
         #                              Сторонники
         # ////////////////////////////////////////////////////////////////
 
+        self.ui.l_l_name_2 = PyLineEdit(
+            text="",
+            place_holder_text="Фамилия",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Фамилия",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_l_name_2.setMinimumHeight(40)
+
+        self.ui.l_name_2 = PyLineEdit(
+            text="",
+            place_holder_text="Имя",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Имя",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_name_2.setMinimumHeight(40)
+
+        self.ui.l_age_2 = PyLineEdit(
+            text="",
+            place_holder_text="Возраст",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Возраст",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_age_2.setMinimumHeight(40)
+
+        self.ui.l_address_2 = PyLineEdit(
+            text="",
+            place_holder_text="Адрес",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Адрес",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_address_2.setMinimumHeight(40)
+
+        self.ui.l_telephone_2 = PyLineEdit(
+            text="",
+            place_holder_text="Телефон",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Телефон",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_telephone_2.setMinimumHeight(40)
+
+        self.ui.l_social_2 = PyLineEdit(
+            text="",
+            place_holder_text="Социальные сети",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Социальные сети",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_social_2.setMinimumHeight(40)
+
+        self.ui.c_responsible_2 = PyComboBox(
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Ответственный",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        users = User.select()
+        dict_user = {}
+        for us in users:
+            user = f"{us.l_name} {us.name}"
+            dict_user.update({user: us.id})
+        for us in dict_user.keys():
+            self.ui.c_responsible_2.addItem(us)
+
+        self.ui.c_loyality_2 = PyComboBox(
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Лояльность",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        loyality = Loyality.select()
+        dict_loyality = {}
+        for lo in loyality:
+            dict_loyality.update({lo.name: lo.id})
+        for lo in dict_loyality.keys():
+            self.ui.c_loyality_2.addItem(lo)
+
+        self.ui.l_desc_2 = PyLineEdit(
+            text="",
+            place_holder_text="Описание",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Описание",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_desc_2.setMinimumHeight(40)
+
+        self.ui.right_column.l_name__l_2.addWidget(self.ui.l_l_name_2)
+        self.ui.right_column.name__l_2.addWidget(self.ui.l_name_2)
+        self.ui.right_column.age__l_2.addWidget(self.ui.l_age_2)
+        self.ui.right_column.address__l_2.addWidget(self.ui.l_address_2)
+        self.ui.right_column.telephone__l_2.addWidget(self.ui.l_telephone_2)
+        self.ui.right_column.social__l_2.addWidget(self.ui.l_social_2)
+        self.ui.right_column.responsible__l_2.addWidget(
+            self.ui.c_responsible_2)
+        self.ui.right_column.loyality__l_2.addWidget(self.ui.c_loyality_2)
+        self.ui.right_column.desc__l_2.addWidget(self.ui.l_desc_2)
+
         # ////////////////////////////////////////////////////////////////
         #                              Мероприятия
         # ////////////////////////////////////////////////////////////////
+        self.ui.l_l_name_2.setMinimumHeight(40)
+
+        self.ui.l_name_3 = PyLineEdit(
+            text="",
+            place_holder_text="Название",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Название",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_name_3.setMinimumHeight(40)
+
+        self.ui.l_budget_3 = PyLineEdit(
+            text="",
+            place_holder_text="Бюджет",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Бюджет",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_budget_3.setMinimumHeight(40)
+
+        self.ui.c_responsible_3 = PyComboBox(
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Ответственный",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        users = User.select()
+        dict_user = {}
+        for us in users:
+            user = f"{us.l_name} {us.name}"
+            dict_user.update({user: us.id})
+        for us in dict_user.keys():
+            self.ui.c_responsible_3.addItem(us)
+
+        self.ui.c_type_3 = PyComboBox(
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Тип мероприятия",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        e_types = E_type.select()
+        dict_types = {}
+        for e in e_types:
+            dict_types.update({e.name: e.id})
+        for e in dict_types.keys():
+            self.ui.c_type_3.addItem(e)
+
+        self.ui.l_desc_3 = PyLineEdit(
+            text="",
+            place_holder_text="Описание",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Описание",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_desc_3.setMinimumHeight(40)
+
+        self.ui.right_column.type__l_3.addWidget(self.ui.c_type_3)
+        self.ui.right_column.name__l_3.addWidget(self.ui.l_name_3)
+        self.ui.right_column.budget__l_3.addWidget(self.ui.l_budget_3)
+        self.ui.right_column.responsible__l_3.addWidget(
+            self.ui.c_responsible_3)
+
+        self.ui.right_column.desc__l_3.addWidget(self.ui.l_desc_3)
 
         # ////////////////////////////////////////////////////////////////
-        #                              KPI
+        #                              Активность
         # ////////////////////////////////////////////////////////////////
+        
+        
+        self.ui.l_address_4 = PyLineEdit(
+            text="",
+            place_holder_text="Адрес",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Адрес",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_address_4.setMinimumHeight(40)
+        
+        self.ui.l_date_4 = PyLineEdit(
+            text="",
+            place_holder_text="Дата",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Дата",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_date_4.setMinimumHeight(40)
+
+        self.ui.l_desc_4 = PyLineEdit(
+            text="",
+            place_holder_text="Описание",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Описание",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        self.ui.l_desc_4.setMinimumHeight(40)
+
+        self.ui.c_e_type_4 = PyComboBox(
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Мероприятие",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        events = Event.select()
+        dict_event = {}
+        for e in events:
+            dict_event.update({e.name: e.id})
+        for e in dict_event.keys():
+            self.ui.c_e_type_4.addItem(e)
+
+        self.ui.c_s_type_4 = PyComboBox(
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            app_parent=self.ui.central_widget,
+            tooltip_text="Мероприятие",
+            dark_one=self.themes["app_color"]["dark_one"],
+            parent=self,
+        )
+        events = Storonnik.select()
+        dict_stor = {}
+        for e in events:
+            name = f"{e.l_name} {e.name}"
+            dict_stor.update({name: e.id})
+        for e in dict_stor.keys():
+            self.ui.c_s_type_4.addItem(e)
+
+        self.ui.right_column.e_type__l_4.addWidget(self.ui.c_e_type_4)
+        self.ui.right_column.storonnik__l_4.addWidget(self.ui.c_s_type_4)
+        self.ui.right_column.address__l_4.addWidget(self.ui.l_address_4)
+        self.ui.right_column.date__l_4.addWidget(
+            self.ui.l_date_4)
+
+        self.ui.right_column.desc__l_4.addWidget(self.ui.l_desc_4)
+
+
+
 
         # ////////////////////////////////////////////////////////////////
         #                              Цитаты
@@ -648,9 +1122,6 @@ class SetupMainWindow:
         )
         self.ui.b_cancel.setMaximumHeight(40)
 
-        self.ui.right_column.save_b__l.addWidget(self.ui.b_save)
-        self.ui.right_column.save_b__l.addWidget(self.ui.b_cancel)
-
         # ///////////////////////////////////////////////////////////////
         #                           функции
         # ///////////////////////////////////////////////////////////////
@@ -660,15 +1131,17 @@ class SetupMainWindow:
         # Выход из правого меню
 
         def cancel():
-            self.ui.add_btn.set_active(False)
-            self.ui.edit_btn.set_active(False)
             MainFunctions.toggle_right_column(self)
 
         # Экспорт в Excel
 
         def export():
             if MainFunctions.get_page(self) == 1:
-                exportxl(self.ui.table, "Команда")
+                exportxl("Команда")
+            if MainFunctions.get_page(self) == 2:
+                exportxl("Сторонники")
+            if MainFunctions.get_page(self) == 3:
+                exportxl("Мероприятия")
 
         # Добавление записи
         def add():
@@ -676,8 +1149,7 @@ class SetupMainWindow:
                 global id_sel
                 id_sel = -1
                 if MainFunctions.get_page(self) == 1:
-                    self.ui.add_btn.set_active(True)
-                    self.ui.edit_btn.set_active(False)
+
                     self.ui.l_l_name.setText(None)
                     self.ui.l_name.setText(None)
                     self.ui.c_table_role.setCurrentIndex(-1)
@@ -689,6 +1161,27 @@ class SetupMainWindow:
                     self.ui.c_responsible.setCurrentIndex(-1)
                     MainFunctions.toggle_right_column(self)
 
+                if MainFunctions.get_page(self) == 2:
+
+                    self.ui.l_l_name_2.setText(None)
+                    self.ui.l_name_2.setText(None)
+                    self.ui.c_loyality_2.setCurrentIndex(-1)
+                    self.ui.l_age_2.setText(None)
+                    self.ui.l_address_2.setText(None)
+                    self.ui.l_telephone_2.setText(None)
+                    self.ui.c_responsible_2.setCurrentIndex(-1)
+                    self.ui.l_desc_2.setText(None)
+                    MainFunctions.toggle_right_column(self)
+
+                if MainFunctions.get_page(self) == 3:
+
+                    self.ui.l_name_3.setText(None)
+                    self.ui.c_type_3.setCurrentIndex(-1)
+                    self.ui.l_budget_3.setText(None)
+                    self.ui.c_responsible_3.setCurrentIndex(-1)
+                    self.ui.l_desc_3.setText(None)
+                    MainFunctions.toggle_right_column(self)
+
         # Редактирование записи
 
         def edit():
@@ -696,11 +1189,17 @@ class SetupMainWindow:
             try:
                 global id_sel
                 for i in self.ui.table.selectedItems():
-                    id_sel = self.ui.table.item(
-                        i.row(), len(self.ui.users)-1).text()
+                    if MainFunctions.get_page(self) == 1:
+                        id_sel = self.ui.table.item(
+                            i.row(), len(self.ui.users)-1).text()
+                    if MainFunctions.get_page(self) == 2:
+                        id_sel = self.ui.table.item(
+                            i.row(), len(self.ui.storoniks)-1).text()
+                    if MainFunctions.get_page(self) == 3:
+                        id_sel = self.ui.table.item(
+                            i.row(), len(self.ui.events)-1).text()
                     if not MainFunctions.right_column_is_visible(self):
-                        self.ui.edit_btn.set_active(True)
-                        self.ui.add_btn.set_active(False)
+
                         if MainFunctions.get_page(self) == 1:
                             team = User.select().where(User.id == id_sel)
                             for t in team:
@@ -728,6 +1227,43 @@ class SetupMainWindow:
                                     cur_index)
                             MainFunctions.toggle_right_column(self)
 
+                        if MainFunctions.get_page(self) == 2:
+                            team = Storonnik.select().where(Storonnik.id == id_sel)
+                            for t in team:
+                                self.ui.l_l_name_2.setText(t.l_name)
+                                self.ui.l_name_2.setText(t.name)
+                                self.ui.c_loyality_2.setCurrentIndex(
+                                    t.loyality_id-1)
+                                self.ui.l_age_2.setText(str(t.age))
+                                self.ui.l_address_2.setText(t.address)
+                                self.ui.l_telephone_2.setText(t.telephone)
+                                self.find = int(t.responsible_id)
+                                if self.find in dict_user.values():
+                                    cur_index = list(
+                                        dict_user.values()).index(self.find)
+                                self.ui.c_responsible_2.setCurrentIndex(
+                                    cur_index)
+                                self.ui.l_social_2.setText(t.social_media)
+                                self.ui.l_desc_2.setText(t.desc)
+                            MainFunctions.toggle_right_column(self)
+
+                        if MainFunctions.get_page(self) == 3:
+                            team = Event.select().where(Event.id == id_sel)
+                            for t in team:
+                                self.ui.l_name_3.setText(t.name)
+                                self.ui.c_type_3.setCurrentIndex(
+                                    t.e_type_id-1)
+                                self.ui.l_budget_3.setText(str(t.budget))
+
+                                self.find = int(t.responsible_id)
+                                if self.find in dict_user.values():
+                                    cur_index = list(
+                                        dict_user.values()).index(self.find)
+                                self.ui.c_responsible_3.setCurrentIndex(
+                                    cur_index)
+                                self.ui.l_desc_3.setText(t.desc)
+                            MainFunctions.toggle_right_column(self)
+
             except:
                 errors_sel()
 
@@ -735,8 +1271,6 @@ class SetupMainWindow:
 
         def save():
             global id_sel
-            self.ui.add_btn.set_active(False)
-            self.ui.edit_btn.set_active(False)
             MainFunctions.toggle_right_column(self)
 
             if MainFunctions.get_page(self) == 1:
@@ -777,6 +1311,66 @@ class SetupMainWindow:
 
                 load_rows(self.ui.table, User(), 'User')
 
+            if MainFunctions.get_page(self) == 2:
+                l_name = self.ui.l_l_name_2.text()
+                name = self.ui.l_name_2.text()
+                loyality = self.ui.c_loyality_2.currentText()
+                id_loyality = dict_loyality[loyality]
+                age = int(self.ui.l_age_2.text())
+                address = self.ui.l_address_2.text()
+                telephone = self.ui.l_telephone_2.text()
+                desc = self.ui.l_desc_2.text()
+                social = self.ui.l_social_2.text()
+                responsible = self.ui.c_responsible_2.currentText()
+                id_responsible = dict_user[responsible]
+
+                if id_sel == -1:
+
+                    db_storonnik = {"l_name": l_name, "name": name,
+                                    "age": age, "address": address, "telephone": telephone, "social_media": social, "loyality_id": id_loyality,
+                                    "responsible_id": id_responsible, "desc": desc}
+                    Storonnik.insert(db_storonnik).execute()
+                else:
+                    for us in Storonnik.select().where(Storonnik.id == id_sel):
+                        us.l_name = l_name
+                        us.name = name
+                        us.loyality_id = id_loyality
+                        us.age = age
+                        us.address = address
+                        us.telephone = telephone
+                        us.responsible_id = id_responsible
+                        us.social_media = social
+                        us.desc = desc
+                        us.save()
+
+                load_rows(self.ui.table, Storonnik(), 'Storonnik')
+
+            if MainFunctions.get_page(self) == 3:
+                name = self.ui.l_name_3.text()
+                types = self.ui.c_type_3.currentText()
+                id_types = dict_types[types]
+                budget = int(self.ui.l_budget_3.text())
+                desc = self.ui.l_desc_3.text()
+                responsible = self.ui.c_responsible_3.currentText()
+                id_responsible = dict_user[responsible]
+
+                if id_sel == -1:
+
+                    db_event = {"e_type_id": id_types, "name": name,
+                                "budget": budget,
+                                "responsible_id": id_responsible, "desc": desc}
+                    Event.insert(db_event).execute()
+                else:
+                    for us in Event.select().where(Event.id == id_sel):
+                        us.name = name
+                        us.e_types_id = id_types
+                        us.budget = budget
+                        us.responsible_id = id_responsible
+                        us.desc = desc
+                        us.save()
+
+                load_rows(self.ui.table, Event(), 'Event')
+
         # Удаение записи
         def delete():
             try:
@@ -785,13 +1379,21 @@ class SetupMainWindow:
                     id_sel = self.ui.table.item(
                         i.row(), len(self.ui.data)-1).text()
                     if not MainFunctions.right_column_is_visible(self):
-                        self.ui.edit_btn.set_active(False)
-                        self.ui.add_btn.set_active(False)
 
                         if MainFunctions.get_page(self) == 1:
                             team = User.get(User.id == id_sel)
                             team.delete_instance()
                             load_rows(self.ui.table, User(), 'User')
+
+                        if MainFunctions.get_page(self) == 2:
+                            storonnik = Storonnik.get(Storonnik.id == id_sel)
+                            storonnik.delete_instance()
+                            load_rows(self.ui.table, Storonnik(), 'Storonnik')
+
+                        if MainFunctions.get_page(self) == 3:
+                            event = Event.get(Event.id == id_sel)
+                            event.delete_instance()
+                            load_rows(self.ui.table, Event(), 'Event')
 
             except:
                 errors_sel()
@@ -822,6 +1424,29 @@ class SetupMainWindow:
             except:
                 errors_sel()
 
+        def action():
+            MainFunctions.set_right_column_menu(
+            self, self.ui.right_column.action_page)
+            self.ui.right_column.e_type__l_4.addWidget(self.ui.c_e_type_4)
+            self.ui.right_column.storonnik__l_4.addWidget(self.ui.c_s_type_4)
+            self.ui.right_column.address__l_4.addWidget(self.ui.l_address_4)
+            self.ui.right_column.date__l_4.addWidget(
+                self.ui.l_date_4)
+
+            self.ui.right_column.desc__l_4.addWidget(self.ui.l_desc_4)
+            if not MainFunctions.right_column_is_visible(self):
+                global id_sel
+                id_sel = -1
+                if MainFunctions.get_page(self) == 2 or 3:
+
+                    self.ui.c_e_type_4.setCurrentIndex(-1)
+                    self.ui.c_s_type_4.setCurrentIndex(-1)
+                    self.ui.l_address_4.setText(None)
+                    self.ui.l_date_4.setText(None)
+                    self.ui.l_desc_4.setText(None)
+                    MainFunctions.toggle_right_column(self)
+            pass
+
         def exportxl(name):
             columnheaders = []
             date = QDate.currentDate().toString('dd-MM-yyyy')
@@ -833,8 +1458,13 @@ class SetupMainWindow:
 
             for row in range(self.ui.table.rowCount()):
                 for col in range(self.ui.table.columnCount()):
-                    if col == 0:
-                        pass
+                    if MainFunctions.get_page(self) == 1:
+                        if col == 0:
+
+                            pass
+                        else:
+                            df.at[row, columnheaders[col]] = self.ui.table.item(
+                                row, col).text()
                     else:
                         df.at[row, columnheaders[col]] = self.ui.table.item(
                             row, col).text()
@@ -882,6 +1512,7 @@ class SetupMainWindow:
         self.ui.delete_btn.clicked.connect(lambda: delete())
         self.ui.export_btn.clicked.connect(lambda: export())
         self.ui.search_btn.clicked.connect(lambda: search())
+        self.ui.action_btn.clicked.connect(lambda: action())
 
         # ------------------------- Правое меню ----------------------------
 
@@ -892,10 +1523,6 @@ class SetupMainWindow:
         # Команда
         self.ui.b_photo.clicked.connect(lambda: get_photo())
 
-        
-
-
-
     def adaptive(self):
         if MainFunctions.get_page(self) == 1:
             self.ui.load_pages.row_1_layout.addWidget(self.ui.table)
@@ -905,6 +1532,10 @@ class SetupMainWindow:
             self.ui.load_pages.row_2_layout.addWidget(self.ui.export_btn)
             self.ui.load_pages.row_2_layout.addWidget(self.ui.find_l)
             self.ui.load_pages.row_2_layout.addWidget(self.ui.search_btn)
+            self.ui.right_column.save_b__l.addWidget(self.ui.b_save)
+            self.ui.right_column.save_b__l.addWidget(self.ui.b_cancel)
+            MainFunctions.set_right_column_menu(
+                self, self.ui.right_column.users_menu)
 
         # ////////////////////////////////////////////////////////////////
         #                              Сторонники
@@ -914,9 +1545,14 @@ class SetupMainWindow:
             self.ui.load_pages.row_2_layout_2.addWidget(self.ui.add_btn)
             self.ui.load_pages.row_2_layout_2.addWidget(self.ui.edit_btn)
             self.ui.load_pages.row_2_layout_2.addWidget(self.ui.delete_btn)
+            self.ui.load_pages.row_2_layout_2.addWidget(self.ui.action_btn)
             self.ui.load_pages.row_2_layout_2.addWidget(self.ui.export_btn)
             self.ui.load_pages.row_2_layout_2.addWidget(self.ui.find_l)
             self.ui.load_pages.row_2_layout_2.addWidget(self.ui.search_btn)
+            self.ui.right_column.save_b__l_2.addWidget(self.ui.b_save)
+            self.ui.right_column.save_b__l_2.addWidget(self.ui.b_cancel)
+            MainFunctions.set_right_column_menu(
+                self, self.ui.right_column.storonik_menu)
 
         # ////////////////////////////////////////////////////////////////
         #                              Мероприятия
@@ -926,9 +1562,14 @@ class SetupMainWindow:
             self.ui.load_pages.row_2_layout_3.addWidget(self.ui.add_btn)
             self.ui.load_pages.row_2_layout_3.addWidget(self.ui.edit_btn)
             self.ui.load_pages.row_2_layout_3.addWidget(self.ui.delete_btn)
+            self.ui.load_pages.row_2_layout_3.addWidget(self.ui.action_btn)
             self.ui.load_pages.row_2_layout_3.addWidget(self.ui.export_btn)
             self.ui.load_pages.row_2_layout_3.addWidget(self.ui.find_l)
             self.ui.load_pages.row_2_layout_3.addWidget(self.ui.search_btn)
+            self.ui.right_column.save_b__l_3.addWidget(self.ui.b_save)
+            self.ui.right_column.save_b__l_3.addWidget(self.ui.b_cancel)
+            MainFunctions.set_right_column_menu(
+                self, self.ui.right_column.event_menu)
 
         # ////////////////////////////////////////////////////////////////
         #                              KPI
@@ -954,9 +1595,6 @@ class SetupMainWindow:
             self.ui.load_pages.row_2_layout_5.addWidget(self.ui.find_l)
             self.ui.load_pages.row_2_layout_5.addWidget(self.ui.search_btn)
 
-
-        
-
         # ///////////////////////////////////////////////////////////////
         #                           Данные
         # ///////////////////////////////////////////////////////////////
@@ -971,35 +1609,33 @@ class SetupMainWindow:
             colum_header(self.ui.table, self.ui.users)
             load_rows(self.ui.table, User(), 'User')
             self.ui.data = self.ui.users
-        
-        
+
         # Сторонники
         if MainFunctions.get_page(self) == 2:
             self.ui.storoniks = ("Фамилия", "Имя",
-                             "Возраст", "Адрес", "Телефон", "Социальные сети", "Ответственный", "Лояльность", "Кол-во мероприятий", "id_storonik")
+                                 "Возраст", "Адрес", "Телефон", "Социальные сети", "Ответственный", "Лояльность", "Кол-во мероприятий", "Описание" "id_storonik")
             deltable(self.ui.table)
             colum_header(self.ui.table, self.ui.storoniks)
             load_rows(self.ui.table, Storonnik(), 'Storonnik')
             self.ui.data = self.ui.storoniks
 
-
         # Мероприятия
         if MainFunctions.get_page(self) == 3:
-            self.ui.evens = ("Тип мероприятия", "Название", "Бюджет", "Ответственный", "Описание", "id_event")
+            self.ui.events = ("Тип мероприятия", "Название", "Бюджет",
+                              "Ответственный", "Участников", "Описание", "id_event")
             deltable(self.ui.table)
-            colum_header(self.ui.table, self.ui.evens)
+            colum_header(self.ui.table, self.ui.events)
             load_rows(self.ui.table, Event(), 'Event')
-            self.ui.data = self.ui.evens
-
+            self.ui.data = self.ui.events
 
         # KPI
         if MainFunctions.get_page(self) == 4:
-            self.ui.kpis = ("Название", "Кол-во", "Дедлайн", "Цель", "Описание", "id_kpi")
+            self.ui.kpis = ("Название", "Кол-во", "Дедлайн",
+                            "Цель", "Описание", "id_kpi")
             deltable(self.ui.table)
             colum_header(self.ui.table, self.ui.kpis)
             load_rows(self.ui.table, Kpi(), 'Kpi')
             self.ui.data = self.ui.kpis
-
 
         # Цитаты
         if MainFunctions.get_page(self) == 5:
@@ -1008,18 +1644,9 @@ class SetupMainWindow:
             colum_header(self.ui.table, self.ui.quotes)
             load_rows(self.ui.table, Quote(), 'Quote')
             self.ui.data = self.ui.quotes
-        
-        
-        
+
         print(MainFunctions.get_page(self))
         pass
-
-
-
-
-
-
-
 
     # RESIZE GRIPS AND CHANGE POSITION
     # Resize or change position when window is resized

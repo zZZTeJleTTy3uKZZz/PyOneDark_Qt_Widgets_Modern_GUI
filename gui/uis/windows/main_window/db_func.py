@@ -105,12 +105,22 @@ def load_rows(table, target, target_name):
         row = 0
         for val in value:
             storonniks = [val.l_name, val.name, str(val.age), val.address, val.telephone, val.social_media, f"{val.responsible.l_name} {val.responsible.name}", 
-            val.loyality.name, str(len(Action.select().where(Action.storonnik_id == val.id))), str(val.id)]
+            val.loyality.name, str(len(Action.select().where(Action.storonnik_id == val.id))), val.desc, str(val.id)]
             for u in range(len(storonniks)):
                 table.setItem(row, u, QTableWidgetItem(storonniks[u]))
                 table.setRowHeight(row, 30)
             row += 1
 
+    if target_name == "Event":
+        row = 0
+        for val in value:
+            events = [val.e_type.name, val.name, str(val.budget), 
+                f"{val.responsible.l_name} {val.responsible.name}", 
+                str(len(Action.select().where(Action.event_id == val.id))), val.desc, str(val.id)]
+            for u in range(len(events)):
+                table.setItem(row, u, QTableWidgetItem(events[u]))
+                table.setRowHeight(row, 30)
+            row += 1
             
 
 
